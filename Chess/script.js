@@ -15,17 +15,17 @@ class piece {
     }
 }
 
-let turn_div =document.getElementById('turnDiv');
+let turn_div = document.getElementById('turnDiv');
 
-let body =document.getElementsByTagName('body')[0];
+let body = document.getElementsByTagName('body')[0];
 let nboard = [
-    [["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"]],
     [["r", "b"], ["n", "b"], ["b", "b"], ["q", "b"], ["k", "b"], ["b", "b"], ["n", "b"], ["r", "b"]],
-    [["0", "0"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"]],
+    [["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"]],
+    [["p", "w"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"]],
     [["r", "b"], ["0", "0"], ["0", "0"], ["b", "w"], ["0", "0"], ["k", "w"], ["0", "0"], ["0", "0"]],
     [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"]],
     [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["q", "w"], ["0", "0"], ["0", "0"], ["0", "0"]],
-    [["p", "w"], ["p", "w"], ["p", "w"], ["p", "w"], ["p", "w"], ["p", "w"], ["p", "w"], ["p", "w"]],
+    [["p", "w"], ["p", "w"], ["p", "b"], ["p", "w"], ["p", "w"], ["p", "w"], ["p", "w"], ["p", "w"]],
     [["r", "w"], ["n", "w"], ["b", "w"], ["q", "w"], ["k", "w"], ["b", "w"], ["n", "w"], ["r", "w"]]
 ];
 
@@ -56,7 +56,7 @@ function showOptions(y, x) { //on click
     let type = nboard[y][x][0];
     let color = nboard[y][x][1]; //color of the current clicked cell
     let legal = false;
-    let sel_list =[];
+    let sel_list = [];
     // for (let i = 0; i < legal_moves.length; i++) {
     //     if (legal_moves[y][x] == 1) {
     //         leagl = true;
@@ -65,20 +65,30 @@ function showOptions(y, x) { //on click
 
 
     // }
-    if (nboard[y][x][1] == current_player||nboard[y][x][0] =="0"||legal_moves[y][x]!=0) {
+    if (nboard[y][x][1] == current_player || nboard[y][x][0] == "0" || legal_moves[y][x] != 0) {
         if (legal_moves[y][x] != 0) {
-
             if (nboard[last_selection[0]][last_selection[1]][0] != 0) {//if last click was on a unit
-                if ((y == 1 || y == height - 1) && nboard[last_selection[0]][last_selection[1]][0] == "p")//did this pawn move?
+                if (nboard[last_selection[0]][last_selection[1]][0] == "p")//did this pawn move?
                 {
-                    if (nboard[last_selection[0]][last_selection[1]][1] == "w") {
-                        movedW[x] = 1;
+                    
+                    if (nboard[last_selection[0]][last_selection[1]][1] == "w" && y == 0) {
+                        nboard[last_selection[0]][last_selection[1]][0] = "q";
+
                     }
-                    else if (nboard[last_selection[0]][last_selection[1]][1] == "b") {
-                        movedB[x] = 1;
+                    else if (nboard[last_selection[0]][last_selection[1]][1] == "b" && y == height - 1) {
+                        nboard[last_selection[0]][last_selection[1]][0] = "q";
+                    }
+
+                    if (y == 1 || y == height - 1)//did this pawn move?
+                    {
+                        if (nboard[last_selection[0]][last_selection[1]][1] == "w") {
+                            movedW[x] = 1;
+                        }
+                        else if (nboard[last_selection[0]][last_selection[1]][1] == "b") {
+                            movedB[x] = 1;
+                        }
                     }
                 }
-
                 nboard[y][x] = nboard[last_selection[0]][last_selection[1]]; //copy the old unit array to the new location
                 nboard[last_selection[0]][last_selection[1]] = ["0", "0"];//empty the last unit array
                 let newClassList = '';
@@ -116,7 +126,7 @@ function showOptions(y, x) { //on click
                 [0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0]
             ];
-             sel_list = document.getElementsByClassName('selected');//wipe selection
+            sel_list = document.getElementsByClassName('selected');//wipe selection
             if (sel_list.length > 0) {
                 let sel_item = sel_list[0];//clear old selected
                 sel_item.classList.remove('selected');
@@ -130,6 +140,19 @@ function showOptions(y, x) { //on click
             //     current_player='w';
             // }
             changePlayer();
+            if (type == "k")
+                    {
+                        if(color=="w")
+                        {
+                            alert("Black Won");
+
+                        }
+                        else
+                        {
+                            alert("White Won");
+
+                        }
+                    }
         }
         else if (nboard[y][x][0] != '0') {//if i hit a non-empty cell that is not a valid move
             let cusid_ele = document.getElementsByClassName('option'); //wipe all options
@@ -138,7 +161,7 @@ function showOptions(y, x) { //on click
                 item.classList.remove('option');
             }
 
-             sel_list = document.getElementsByClassName('selected');//wipe selection
+            sel_list = document.getElementsByClassName('selected');//wipe selection
             if (sel_list.length > 0) { //if i already clicked
 
                 let sel_item = sel_list[0];//clear old selected
