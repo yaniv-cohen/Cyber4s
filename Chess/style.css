@@ -1,0 +1,148 @@
+body{
+    background-color: rgb(243, 243, 243);
+
+}
+table{
+    border:4px black solid;
+}
+
+.container{
+    padding:20px;
+    
+    /* background-color: rgb(51, 44, 34);
+    color:white; */
+}
+.turnContainer{
+    width: 300px;
+    height: 160px;
+    display: flex;
+}
+.whiteTurn{
+background-color: rgb(245, 245, 245);
+color:black;
+}
+.blackTurn{
+    background-color: rgb(21, 18, 14);
+    color:white;
+}
+.box{
+    border: 4px rgb(143, 20, 20) solid;
+    width: 300px;
+    height: 160px;
+    padding:10px;
+    font-size: 20px;
+}
+#chessBoard{
+    width:1500px;
+}
+td{
+    width:70px;
+    height:70px;
+}
+
+
+.cellW{
+    background:   rgb(234, 234, 234);
+}
+.cellB{
+    background:   rgb(72, 72, 72);
+}
+.selected{
+    background-color: rgb(147, 220, 38);
+}
+.option{
+    background-color: rgba(147, 220, 38,0.5);
+}
+.red{
+    background-color: rgb(202, 52, 52) !important;
+}
+.kingB{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Chess_kdt45.svg/1024px-Chess_kdt45.svg.png')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.queenB{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Chess_qdt45.svg/1024px-Chess_qdt45.svg.png')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.rookB{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Chess_rdt45.svg/1024px-Chess_rdt45.svg.png')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.bishopB{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Chess_bdt45.svg/1024px-Chess_bdt45.svg.png')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.knightB{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Chess_ndt45.svg/1024px-Chess_ndt45.svg.png')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.pawnB{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Chess_pdt45.svg/1024px-Chess_pdt45.svg.png')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.kingW{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Chess_klt45.svg/1024px-Chess_klt45.svg.png')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.queenW{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Chess_qlt45.svg/1024px-Chess_qlt45.svg.png')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.rookW{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Chess_rlt45.svg/1024px-Chess_rlt45.svg.png')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.bishopW{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Chess_blt45.svg/1024px-Chess_blt45.svg.png')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.knightW{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Chess_nlt45.svg/1024px-Chess_nlt45.svg.png')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.pawnW{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Chess_plt45.svg/1024px-Chess_plt45.svg.png')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.tankB{
+    background-image: url('black_tank.svg')  ;
+    background-size: 60px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.tankW{
+    background-image: url('white_tank.svg')  ;
+    background-size: 60px;
+    background-repeat: no-repeat;
+    background-position: center;
+}

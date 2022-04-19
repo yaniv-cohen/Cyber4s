@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 125.581 72.674" xmlns="http://www.w3.org/2000/svg">
+  <rect x="32.918" y="9.918" width="37.791" height="16.86" style="stroke: rgb(0, 0, 0); fill: rgb(59, 59, 59);"/>
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgb(59, 59, 59);" cx="52.569" cy="29.337" rx="28.779" ry="8.721"/>
+  <rect x="60.825" y="24.337" width="54" height="10" style="stroke: rgb(0, 0, 0); fill: rgb(59, 59, 59);"/>
+  <rect x="11.918" y="38.337" width="101.744" height="18.023" rx="16" ry="16" style="stroke: rgb(0, 0, 0); fill: rgb(59, 59, 59);"/>
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgb(59, 59, 59);" cx="31.569" cy="47.337" rx="6" ry="6"/>
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgb(59, 59, 59);" cx="51.569" cy="47.337" rx="6" ry="6"/>
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgb(59, 59, 59);" cx="71.569" cy="47.337" rx="6" ry="6"/>
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgb(59, 59, 59);" cx="91.569" cy="47.337" rx="6" ry="6"/>
+</svg>
