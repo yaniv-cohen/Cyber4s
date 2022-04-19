@@ -19,14 +19,14 @@ let turn_div = document.getElementById('turnDiv');
 
 let body = document.getElementsByTagName('body')[0];
 let nboard = [
-    [["r", "b"], ["n", "b"], ["b", "b"], ["q", "b"], ["k", "b"], ["b", "b"], ["n", "b"], ["r", "b"]],
+    [["r", "b"], ["0", "0"], ["0", "0"], ["0", "0"], ["k", "b"], ["b", "b"], ["n", "b"], ["r", "b"]],
     [["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"]],
     [["p", "w"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"]],
     [["r", "b"], ["0", "0"], ["0", "0"], ["b", "w"], ["0", "0"], ["k", "w"], ["0", "0"], ["0", "0"]],
     [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"]],
     [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["q", "w"], ["0", "0"], ["0", "0"], ["0", "0"]],
     [["p", "w"], ["p", "w"], ["p", "b"], ["p", "w"], ["p", "w"], ["p", "w"], ["p", "w"], ["p", "w"]],
-    [["r", "w"], ["n", "w"], ["b", "w"], ["q", "w"], ["k", "w"], ["b", "w"], ["n", "w"], ["r", "w"]]
+    [["r", "w"], ["0", "0"], ["0", "0"], ["0", "0"], ["n", "w"], ["0", "0"], ["0", "0"], ["r", "w"]]
 ];
 
 let board = [];
@@ -70,15 +70,12 @@ function showOptions(y, x) { //on click
             if (nboard[last_selection[0]][last_selection[1]][0] != 0) {//if last click was on a unit
                 if (nboard[last_selection[0]][last_selection[1]][0] == "p")//did this pawn move?
                 {
-                    
                     if (nboard[last_selection[0]][last_selection[1]][1] == "w" && y == 0) {
                         nboard[last_selection[0]][last_selection[1]][0] = "q";
-
                     }
                     else if (nboard[last_selection[0]][last_selection[1]][1] == "b" && y == height - 1) {
                         nboard[last_selection[0]][last_selection[1]][0] = "q";
                     }
-
                     if (y == 1 || y == height - 1)//did this pawn move?
                     {
                         if (nboard[last_selection[0]][last_selection[1]][1] == "w") {
@@ -87,6 +84,49 @@ function showOptions(y, x) { //on click
                         else if (nboard[last_selection[0]][last_selection[1]][1] == "b") {
                             movedB[x] = 1;
                         }
+                    }
+                }
+                if (nboard[last_selection[0]][last_selection[1]][0] == "k")//if i moved a king
+                {
+                    if (nboard[last_selection[0]][last_selection[1]][1] == "b") {//castle black
+                        if (x == 2) {
+                            nboard[0][x + 1][0] = "r";
+                            nboard[0][x + 1][1] = "b";
+                            table.rows[y].cells[x + 1].classList.add('rookB');
+                            nboard[0][0][0] = "0";
+                            nboard[0][0][1] = "0";
+                            table.rows[0].cells[0].classList.remove('rookB');
+                        }
+                        else if (x ==width+  2) {
+                            nboard[0][x - 1][0] = "r";
+                            nboard[0][x - 1][1] = "b";
+                            table.rows[y].cells[x - 1].classList.add('rookB');
+                            nboard[0][width - 1][0] = "0";
+                            nboard[0][width - 1][1] = "0";
+                            table.rows[0].cells[width - 1].classList.remove('rookB');
+                        }
+                        canCastleB[0] = false;
+                        canCastleB[1] = false;
+                    }
+                    else if (nboard[last_selection[0]][last_selection[1]][1] == "w") {//castle black
+                        if (x == last_selection[1] - 2) {
+                            nboard[y][x + 1][0] = "r";
+                            nboard[y][x + 1][1] = "w";
+                            table.rows[y].cells[x + 1].classList.add('rookW');
+                            nboard[y][0][0] = "0";
+                            nboard[y][0][1] = "0";
+                            table.rows[y].cells[0].classList.remove('rookW');
+                        }
+                        else if (x == last_selection[1] + 2) {
+                            nboard[y][x - 1][0] = "r";
+                            nboard[y][x - 1][1] = "w";
+                            table.rows[y].cells[x - 1].classList.add('rookW');
+                            nboard[y][width - 1][0] = "0";
+                            nboard[y][width - 1][1] = "0";
+                            table.rows[y].cells[width - 1].classList.remove('rookW');
+                        }
+                        canCastleW[0] = false;
+                        canCastleW[1] = false;
                     }
                 }
                 nboard[y][x] = nboard[last_selection[0]][last_selection[1]]; //copy the old unit array to the new location
@@ -140,19 +180,16 @@ function showOptions(y, x) { //on click
             //     current_player='w';
             // }
             changePlayer();
-            if (type == "k")
-                    {
-                        if(color=="w")
-                        {
-                            alert("Black Won");
+            if (type == "k") {
+                if (color == "w") {
+                    alert("Black Won");
 
-                        }
-                        else
-                        {
-                            alert("White Won");
+                }
+                else {
+                    alert("White Won");
 
-                        }
-                    }
+                }
+            }
         }
         else if (nboard[y][x][0] != '0') {//if i hit a non-empty cell that is not a valid move
             let cusid_ele = document.getElementsByClassName('option'); //wipe all options
