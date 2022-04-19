@@ -193,7 +193,7 @@ function pawnB(y, x, color, nboard) {
         {
             table.rows[y + 2].cells[x].classList.add('option');
             // movedB[x] = 1;
-            legal_moves[+2][x] = 1;
+            legal_moves[y+2][x] = 1;
         }
     }
 
