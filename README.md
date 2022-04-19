@@ -1,2 +1,2 @@
 # Cyber4s
-[chess is here](https://github.com/yanivfast1/Cyber4s/chess/index.html)
+[1. chess.](https://github.com/yanivfast1/Cyber4s/tree/main/Chess)

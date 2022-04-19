@@ -1,2 +1,2 @@
 # Real_Chess
-click [here](https://yanivfast1.github.io/Cyber4s/Chess/)
+click [here](https://github.com/yanivfast1/Cyber4s/chess/)
