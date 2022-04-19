@@ -140,14 +140,14 @@ td{
 
 .tankB{
     background-image: url('black_tank.svg')  ;
-    background-size: 60px;
+    background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .tankW{
     background-image: url('white_tank.svg')  ;
-    background-size: 60px;
+    background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
