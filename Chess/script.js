@@ -19,14 +19,14 @@ let turn_div = document.getElementById('turnDiv');
 
 let body = document.getElementsByTagName('body')[0];
 let nboard = [
-    [["r", "b"], ["0", "0"], ["0", "0"], ["0", "0"], ["k", "b"], ["b", "b"], ["n", "b"], ["r", "b"]],
-    [["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"], ["p", "b"]],
-    [["p", "w"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"]],
-    [["r", "b"], ["0", "0"], ["0", "0"], ["b", "w"], ["0", "0"], ["k", "w"], ["0", "0"], ["0", "0"]],
+    [["r", "b"], ["n", "b"], ["b", "b"], ["q", "b"], ["k", "b"], ["b", "b"], ["n", "b"], ["r", "b"]],
+    [["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"]],
+    [["0", "0"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"]],
     [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"]],
-    [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["q", "w"], ["0", "0"], ["0", "0"], ["0", "0"]],
-    [["p", "w"], ["p", "w"], ["p", "b"], ["p", "w"], ["p", "w"], ["p", "w"], ["p", "w"], ["p", "w"]],
-    [["r", "w"], ["0", "0"], ["0", "0"], ["0", "0"], ["n", "w"], ["0", "0"], ["0", "0"], ["r", "w"]]
+    [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"]],
+    [["0", "0"], ["0", "0"], ["p", "w"], ["0", "0"], ["0", "0"], ["p", "w"], ["0", "0"], ["0", "0"]],
+    [["p", "w"], ["p", "w"], ["t", "w"], ["p", "w"], ["p", "w"], ["t", "w"], ["p", "w"], ["p", "w"]],
+    [["r", "w"], ["n", "w"], ["b", "w"], ["q", "w"], ["k", "w"], ["b", "w"], ["n", "w"], ["r", "w"]]
 ];
 
 let board = [];
@@ -209,7 +209,7 @@ function showOptions(y, x) { //on click
             {
 
                 table.rows[y].cells[x].classList.toggle('selected');
-                console.log('type is ' + type);
+                
                 if (type == 'r') { //handle rook
 
                     rook(y, x, color, nboard);
@@ -227,7 +227,7 @@ function showOptions(y, x) { //on click
 
                     knight(y, x, color, nboard);
                 }
-                else if (type = 'p') {
+                else if (type == 'p') {
                     if (color == "w") {
 
                         pawnW(y, x, color, nboard);
@@ -235,6 +235,17 @@ function showOptions(y, x) { //on click
                     else if (color == "b") {
 
                         pawnB(y, x, color, nboard);
+                    }
+                }
+                else if (type == 't') {
+                    console.log("type: " + type);
+                    
+                    if (color == "w") {
+                        console.log("color: " + color);
+                        tankW(y, x, color, nboard);
+                    }
+                    else if (color == "b") {
+                        tankB(y, x, color, nboard);
                     }
                 }
 
@@ -272,6 +283,9 @@ function get_class(type, color) {
         else if (type == "p") {
             return ('pawnB');
         }
+        else if (type == "t") {
+            return ('tankB');
+        }
     }
     else if (color == "w") {
         if (type == "k") {
@@ -291,6 +305,9 @@ function get_class(type, color) {
         }
         else if (type == "p") {
             return ('pawnW');
+        }
+        else if (type == "t") {
+            return ('tankW');
         }
     }
     return ('');

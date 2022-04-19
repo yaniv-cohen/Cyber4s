@@ -338,3 +338,39 @@ function knight(y, x, color, nboard) {
     }
 
 }
+function tankW(y, x, color, nboard) {
+
+    if (y > 0) {
+
+        legal_moves[y - 1][x] = 1; //destroy up
+        table.rows[y - 1].cells[x].classList.add('option');
+        if (x > 0) //destroy up left
+        {
+            legal_moves[y - 1][x - 1] = 1;
+            table.rows[y - 1].cells[x - 1].classList.add('option');
+        }
+        if (x < width - 1)//destroy up right
+        {
+            legal_moves[y - 1][x + 1] = 1;
+            table.rows[y - 1].cells[x + 1].classList.add('option');
+        }
+    }
+}
+function tankB(y, x, color, nboard) {
+
+    if (y < height - 1) {
+
+        legal_moves[y + 1][x] = 1; //destroy up
+        table.rows[y + 1].cells[x].classList.add('option');
+        if (x > 0) //destroy up left
+        {
+            legal_moves[y + 1][x - 1] = 1;
+            table.rows[y + 1].cells[x - 1].classList.add('option');
+        }
+        if (x < width - 1)//destroy up right
+        {
+            legal_moves[y + 1][x + 1] = 1;
+            table.rows[y + 1].cells[x + 1].classList.add('option');
+        }
+    }
+}
