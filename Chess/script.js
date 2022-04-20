@@ -18,7 +18,16 @@ class piece {
 let turn_div = document.getElementById("turnDiv");
 
 let body = document.getElementsByTagName("body")[0];
-let nboard = [[["r", "b"], ["n", "b"], ["b", "b"], ["q", "b"], ["k", "b"], ["b", "b"], ["n", "b"], ["r", "b"],], [["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"],], [["0", "0"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"],], [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],], [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],], [["0", "0"], ["0", "0"], ["p", "w"], ["0", "0"], ["0", "0"], ["p", "w"], ["0", "0"], ["0", "0"],], [["p", "w"], ["p", "w"], ["t", "w"], ["p", "w"], ["p", "w"], ["t", "w"], ["p", "w"], ["p", "w"],], [["r", "w"], ["n", "w"], ["b", "w"], ["q", "w"], ["k", "w"], ["b", "w"], ["n", "w"], ["r", "w"],],];
+let nboard = [
+    [["r", "b"], ["n", "b"], ["b", "b"], ["q", "b"], ["k", "b"], ["b", "b"], ["n", "b"], ["r", "b"],],
+    [["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"],],
+    [["0", "0"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"],], 
+    [["0", "0"], ["0", "0"], ["0", "0"], ["b", "b"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],], 
+    [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],], 
+    [["0", "0"], ["0", "0"], ["p", "w"], ["0", "0"], ["0", "0"], ["p", "w"], ["0", "0"], ["0", "0"],], 
+    [["p", "w"], ["b", "b"], ["p", "w"], ["p", "b"], ["p", "b"], ["t", "w"], ["p", "w"], ["p", "w"],], 
+    [["r", "w"], ["n", "w"], ["b", "w"], ["0", "0"], ["k", "w"], ["0", "0"], ["n", "w"], ["r", "w"],],
+];
 
 let board = [];
 for (let i = 0; i < height; i++) {
@@ -28,7 +37,7 @@ for (let i = 0; i < height; i++) {
     }
 }
 
-// console.log("board is " + board[4][2].type);
+
 
 let legal_moves = [
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -43,15 +52,14 @@ let legal_moves = [
 function boardClick(y, x) {
     //on click
     let type = nboard[y][x][0];
-    console.log("type: " + type);
+
     let color = nboard[y][x][1]; //color of the current clicked cell
     let previous_type = last_selection[2];
     let previous_color = last_selection[3];
     let legal = false;
     let sel_list = [];
-    if(y==last_selection[0] &&x==last_selection[1]) 
-    {
-        sameCellClick(y,x);
+    if (y == last_selection[0] && x == last_selection[1]) {
+        sameCellClick(y, x);
 
 
 
@@ -72,7 +80,7 @@ function boardClick(y, x) {
                     //if i moved a king
                     handleKingSpecialMoves(y, x, nboard, previous_type, previous_color);
                 }
-                console.log("y: " + y);
+
                 moveActivePiece(y, x, previous_type, previous_color);
             }
             var cusid_ele = document.getElementsByClassName("option"); //wipe all options
@@ -136,7 +144,7 @@ function boardClick(y, x) {
         }
     }
 }
-function sameCellClick(y,x){
+function sameCellClick(y, x) {
     table.rows[y].cells[x].classList.remove('selected');
     legal_moves = [
         [0, 0, 0, 0, 0, 0, 0, 0],
@@ -293,10 +301,10 @@ function getLegalByPiece(y, x, type, color, nboard) {
             pawnB(y, x, color, nboard);
         }
     } else if (type == "t") {
-        // console.log("type: " + type);
+
 
         if (color == "w") {
-            // console.log("color: " + color);
+
             tankW(y, x, color, nboard);
         } else if (color == "b") {
             tankB(y, x, color, nboard);
