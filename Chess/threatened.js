@@ -198,6 +198,79 @@ function dangerPawnWhite(y, x, color, nboard) {
     }
   }
 }
+function dangerKnight(y, x, color, nboard){
+    if (y > 1) {
+        //top
+        if (
+            x > 0 &&
+            (nboard[y - 2][x - 1][0] == "k" || color != nboard[y - 2][x - 1][1])
+        ) {
+            //.rows[y - 2].cells[x - 1].classList.add("option");
+            //_moves[y - 2][x - 1] = 1;
+        }
+
+        if (
+            x < width - 1 &&
+            (nboard[y - 2][x + 1][0] == "0" || color != nboard[y - 2][x + 1][1])
+        ) {
+            //.rows[y - 2].cells[x + 1].classList.add("option");
+            //_moves[y - 2][x + 1] = 1;
+        }
+    }
+    if (y < height - 2) {
+        //bottom
+        if (
+            x > 0 &&
+            (nboard[y + 2][x - 1][0] == "0" || color != nboard[y + 2][x - 1][1])
+        ) {
+            //.rows[y + 2].cells[x - 1].classList.add("option");
+            //_moves[y + 2][x - 1] = 1;
+        }
+        if (
+            x < width - 1 &&
+            (nboard[y + 2][x + 1][0] == "0" || color != nboard[y + 2][x + 1][1])
+        ) {
+            //.rows[y + 2].cells[x + 1].classList.add("option");
+            //_moves[y + 2][x + 1] = 1;
+        }
+    }
+    if (x < width - 2) {
+        //right
+        if (
+            y > 0 &&
+            (nboard[y - 1][x + 2][0] == "0" || color != nboard[y - 1][x + 2][1])
+        ) {
+            //.rows[y - 1].cells[x + 2].classList.add("option");
+            //_moves[y - 1][x + 2] = 1;
+        }
+
+        if (
+            y < height - 1 &&
+            (nboard[y + 1][x + 2][0] == "0" || color != nboard[y + 1][x + 2][1])
+        ) {
+            //.rows[y + 1].cells[x + 2].classList.add("option");
+            //_moves[y + 1][x + 2] = 1;
+        }
+    }
+    if (x > 1) {
+        //left
+        if (
+            y > 0 &&
+            (nboard[y - 1][x - 2][0] == "0" || color != nboard[y - 1][x - 2][1])
+        ) {
+            //.rows[y - 1].cells[x - 2].classList.add("option");
+            //_moves[y - 1][x - 2] = 1;
+        }
+
+        if (
+            y < height - 1 &&
+            (nboard[y + 1][x - 2][0] == "0" || color != nboard[y + 1][x - 2][1])
+        ) {
+            //.rows[y + 1].cells[x - 2].classList.add("option");
+            //_moves[y + 1][x - 2] = 1;
+        }
+    }
+}
 function dangerKing(y, x, color, nboard) {
   if (y > 0) {
     //top up
@@ -255,12 +328,12 @@ function threatened(y, x, color, nboard) {
   let specificColorDanger =
     (color == "w" && dangerPawnBlack(y, x, color, nboard)) ||
     (color == "b" && dangerPawnWhite(y, x, color, nboard));
-    console.log("specificColorDanger: " + specificColorDanger);
 
   return (
     dangerStright(y, x, color, nboard) ||
     dangerDiagonal(y, x, color, nboard) ||
     specificColorDanger||
-    dangerKing(y, x, color, nboard)
+    dangerKing(y, x, color, nboard)||
+    dangerKnight(y, x, color, nboard)
   );
 }
