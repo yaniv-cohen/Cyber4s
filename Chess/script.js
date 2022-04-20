@@ -277,7 +277,7 @@ function showOptions(y, x) {
         x != last_selection[1] ||
         sel_list.length == 0
       ) {
-        function getLegalMoves();
+        getLegalMoves();
       } 
       else {
         table.rows[y].cells[x].classList.remove("selected");
