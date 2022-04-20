@@ -1,5 +1,5 @@
 function rook(y, x, color, nboard) {
-    // console.log('rook');
+
     if (color == "b") {
         if (y == 0 && x == 0) {
             canCastleB[0] = false;
@@ -220,7 +220,7 @@ function king(y, x, color, nboard) {
         ) {
             table.rows[y].cells[x - 2].classList.add("option");
             legal_moves[y][x - 2] = 1;
-            console.log("legal_moves: " + legal_moves[y][x - 2]);
+
         }
         //castle right
         if (
@@ -231,12 +231,12 @@ function king(y, x, color, nboard) {
         ) {
             table.rows[y].cells[x + 2].classList.add("option");
             legal_moves[y][x + 2] = 1;
-            console.log("legal_moves: " + legal_moves[y][x + 2]);
+   
         }
     }
     if (canCastleW[0] && color == "w") {
         //castle white
-        console.log("color: " + color);
+   
 
         //castle left
         if (
