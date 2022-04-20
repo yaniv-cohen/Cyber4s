@@ -25,7 +25,7 @@ function paintGrid() {
             }
             cell.addEventListener('click', () => {
                 
-                showOptions(i, k, cell.type);
+                boardClick(i, k, cell.type);
             })
         }
         
