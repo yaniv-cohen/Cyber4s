@@ -286,7 +286,7 @@ function showOptions(y, x) {
   }
 }
 
-function getLegalMoves()
+function getLegalMoves(y,x,type)
 {
         //if clicked on diffrent
         table.rows[y].cells[x].classList.toggle("selected");
