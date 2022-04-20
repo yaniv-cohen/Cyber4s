@@ -49,7 +49,14 @@ function boardClick(y, x) {
     let previous_color = last_selection[3];
     let legal = false;
     let sel_list = [];
-    if (
+    if(y==last_selection[0] &&x==last_selection[1]) 
+    {
+        sameCellClick(y,x);
+
+
+
+    }
+    else if (
         color == current_player ||
         previous_type == "0" ||
         legal_moves[y][x] != 0
@@ -129,7 +136,24 @@ function boardClick(y, x) {
         }
     }
 }
-
+function sameCellClick(y,x){
+    table.rows[y].cells[x].classList.remove('selected');
+    legal_moves = [
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+    ];
+    var cusid_ele = document.getElementsByClassName("option"); //wipe all options
+    while (cusid_ele.length > 0) {
+        var item = cusid_ele[0];
+        item.classList.remove("option");
+    }
+}
 function handlePawnSpecialMoves(y, x, previous_type, previous_color) {
     if (previous_color == "w" && y == 0) {
         previous_type = "q";
