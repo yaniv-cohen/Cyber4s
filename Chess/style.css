@@ -47,10 +47,10 @@ td{
 
 
 .cellW{
-    background:   rgb(234, 234, 234);
+    background:   #F2DCAF;
 }
 .cellB{
-    background:   rgb(72, 72, 72);
+    background:   #BC895A;
 }
 .selected{
     background-color: rgb(147, 220, 38);
