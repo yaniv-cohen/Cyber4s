@@ -152,3 +152,15 @@ td{
     background-repeat: no-repeat;
     background-position: center;
 }
+.portalW{
+    background-image: url('white-portal.svg')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.portalB{
+    background-image: url('black-portal.svg')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}

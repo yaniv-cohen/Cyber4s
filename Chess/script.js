@@ -8,6 +8,16 @@ let last_selection = ["", "", "", ""];
 let movedB = [0, 0, 0, 0, 0, 0, 0, 0];
 let movedW = [0, 0, 0, 0, 0, 0, 0, 0];
 let current_player = "w";
+let previous_board =[
+    [["r", "b"], ["n", "b"], ["b", "b"], ["q", "b"], ["k", "b"], ["b", "b"], ["n", "b"], ["r", "b"],],
+    [["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"],],
+    [["0", "0"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"], ["p", "b"], ["pr", "b"], ["0", "0"],],
+    [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],],
+    [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],],
+    [["0", "0"], ["pr", "w"], ["p", "w"], ["0", "0"], ["0", "0"], ["p", "w"], ["0", "0"], ["0", "0"],],
+    [["p", "w"], ["p", "w"], ["t", "w"], ["p", "w"], ["p", "w"], ["t", "w"], ["p", "w"], ["p", "w"],],
+    [["r", "w"], ["n", "w"], ["b", "w"], ["q", "w"], ["k", "w"], ["b", "w"], ["n", "w"], ["r", "w"],],
+];
 class piece {
     constructor(type, color) {
         this.type = type;
@@ -19,14 +29,14 @@ let turn_div = document.getElementById("turnDiv");
 
 let body = document.getElementsByTagName("body")[0];
 let nboard = [
-    [["r", "b"], ["n", "b"], ["b", "b"], ["0", "0"], ["k", "b"], ["b", "b"], ["n", "b"], ["r", "b"],],
-    [["p", "b"], ["p", "b"], ["p", "w"], ["p", "b"], ["p", "b"], ["b", "w"], ["p", "b"], ["p", "b"],],
-    [["0", "0"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"],], 
-    [["0", "0"], ["0", "0"], ["0", "0"], ["b", "b"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],], 
-    [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],], 
-    [["0", "0"], ["0", "0"], ["p", "w"], ["0", "0"], ["0", "0"], ["p", "w"], ["0", "0"], ["0", "0"],], 
-    [["p", "w"], ["b", "b"], ["p", "w"], ["p", "b"], ["p", "b"], ["t", "w"], ["p", "w"], ["p", "w"],], 
-    [["r", "w"], ["n", "w"], ["b", "w"], ["0", "0"], ["k", "w"], ["0", "0"], ["n", "w"], ["r", "w"],],
+    [["r", "b"], ["n", "b"], ["b", "b"], ["q", "b"], ["k", "b"], ["b", "b"], ["n", "b"], ["r", "b"],],
+    [["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"],],
+    [["0", "0"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"], ["p", "b"], ["pr", "b"], ["0", "0"],],
+    [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],],
+    [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],],
+    [["0", "0"], ["pr", "w"], ["p", "w"], ["0", "0"], ["0", "0"], ["p", "w"], ["0", "0"], ["0", "0"],],
+    [["p", "w"], ["p", "w"], ["t", "w"], ["p", "w"], ["p", "w"], ["t", "w"], ["p", "w"], ["p", "w"],],
+    [["r", "w"], ["n", "w"], ["b", "w"], ["q", "w"], ["k", "w"], ["b", "w"], ["n", "w"], ["r", "w"],],
 ];
 
 let board = [];
@@ -72,16 +82,18 @@ function boardClick(y, x) {
         if (legal_moves[y][x] != 0) {
             if (previous_type != 0) {
                 //if last click was on a unit
-                if (previous_type == "p") {
+                previous_board=nboard;
+                if (previous_type=="p"&&handlePawnSpecialMoves(y, x, previous_color)) {
                     //did this pawn move?
-                    handlePawnSpecialMoves(y, x, previous_type, previous_color);
+                    previous_type ="q";
+                    
                 }
-                if (previous_type == "k") {
+                else if (previous_type == "k") {
                     //if i moved a king
                     handleKingSpecialMoves(y, x, nboard, previous_type, previous_color);
                 }
-
-                moveActivePiece(y, x, previous_type, previous_color);
+               
+                    moveActivePiece(y, x, previous_type, previous_color);
             }
             var cusid_ele = document.getElementsByClassName("option"); //wipe all options
             while (cusid_ele.length > 0) {
@@ -162,13 +174,15 @@ function sameCellClick(y, x) {
         item.classList.remove("option");
     }
 }
-function handlePawnSpecialMoves(y, x, previous_type, previous_color) {
+function handlePawnSpecialMoves(y, x, previous_color) {
+    console.log("previous_color is " + previous_color + y);
     if (previous_color == "w" && y == 0) {
-        previous_type = "q";
+        return ("q");
+
     } else if (previous_color == "b" && y == height - 1) {
-        previous_type = "q";
+        return('q');
     }
-    if (y == 1 || y == height - 1) {
+    else if (y == 1 || y == height - 1) {
         //did this pawn move?
         if (previous_color == "w") {
             movedW[x] = 1;
@@ -251,6 +265,9 @@ function get_class(type, color) {
         } else if (type == "t") {
             return "tankB";
         }
+        else if(type ="pr"){
+            return 'portalB';
+        }
     } else if (color == "w") {
         if (type == "k") {
             return "kingW";
@@ -266,6 +283,9 @@ function get_class(type, color) {
             return "pawnW";
         } else if (type == "t") {
             return "tankW";
+        }
+        else if(type ="pr"){
+            return 'portalW';
         }
     }
     return "";
@@ -300,14 +320,18 @@ function getLegalByPiece(y, x, type, color, nboard) {
         } else if (color == "b") {
             pawnB(y, x, color, nboard);
         }
-    } else if (type == "t") {
+    } 
+    else if (type == "pr") {
+        console.log("call portal");
+        portal(y, x, color, nboard);
+    }
 
-
+    else if (type == "t") {
         if (color == "w") {
-
             tankW(y, x, color, nboard);
         } else if (color == "b") {
             tankB(y, x, color, nboard);
         }
     }
+
 }

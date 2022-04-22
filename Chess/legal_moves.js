@@ -231,12 +231,12 @@ function king(y, x, color, nboard) {
         ) {
             table.rows[y].cells[x + 2].classList.add("option");
             legal_moves[y][x + 2] = 1;
-   
+
         }
     }
     if (canCastleW[0] && color == "w") {
         //castle white
-   
+
 
         //castle left
         if (
@@ -384,6 +384,11 @@ function tankW(y, x, color, nboard) {
     if (y > 0) {
         legal_moves[y - 1][x] = 1; //destroy up
         table.rows[y - 1].cells[x].classList.add("option");
+        if(y>1 && legal_moves[y - 1][x][1] == "w")
+        {
+            
+            table.rows[y - 1].cells[x].classList.add("option");
+        }
         if (x > 0) {
             //destroy up left
             legal_moves[y - 1][x - 1] = 1;
@@ -395,6 +400,29 @@ function tankW(y, x, color, nboard) {
             table.rows[y - 1].cells[x + 1].classList.add("option");
         }
     }
+    // else {
+    //     legal_moves[height - 1][x] = 1; //destroy up
+    //     table.rows[height - 1].cells[x].classList.add("option");
+    //     if (x == 0) {
+    //         //destroy up left
+    //         legal_moves[height - 1][width - 1] = 1;
+    //         table.rows[height - 1].cells[width - 1].classList.add("option");
+    //     }
+    //     else {
+    //         legal_moves[height - 1][x - 1] = 1;
+    //         table.rows[height - 1].cells[x - 1].classList.add("option");
+    //     }
+    //     if (x == width - 1) {
+    //         //destroy up right
+    //         legal_moves[height - 1][0] = 1;
+    //         table.rows[height - 1].cells[0].classList.add("option");
+    //     }
+    //     else {
+    //         legal_moves[height - 1][x + 1] = 1;
+    //         table.rows[height - 1].cells[x + 1].classList.add("option");
+    //     }
+
+    // }
 }
 function tankB(y, x, color, nboard) {
     if (y < height - 1) {
@@ -409,6 +437,77 @@ function tankB(y, x, color, nboard) {
             //destroy up right
             legal_moves[y + 1][x + 1] = 1;
             table.rows[y + 1].cells[x + 1].classList.add("option");
+
         }
+    }
+}
+function portal(y, x, color, nboard) {
+    console.log("portal");
+    //look up
+    if (y < height - 1) {
+        if (nboard[y + 1][x][0] == "0") {
+            legal_moves[y + 1][x] = 1;
+            table.rows[y + 1].cells[x].classList.add("option");
+            
+        } else {
+            if (color != nboard[y + 1][x][1]) {
+                legal_moves[y + 1][x] = 1;
+                table.rows[y + 1].cells[x].classList.add("option");
+
+            }
+
+        }
+    }
+    // look down
+    if (y > 0) {
+        if (nboard[y - 1][x][0] == "0") {
+            table.rows[y - 1].cells[x].classList.add("option");
+            legal_moves[y - 1][x] = 1;
+        } else {
+            if (color != nboard[y - 1][x][1]) {
+                table.rows[y - 1].cells[x].classList.add("option");
+                legal_moves[y - 1][x] = 1;
+            }
+
+        }
+    }
+
+
+    //look left
+    for (let i = x - 1; true; i--) {
+        //look left
+        if (i < 0) {
+            i = height - 1;
+        }
+        if (nboard[y][i][0] == "0") {
+            table.rows[y].cells[i].classList.add("option");
+            legal_moves[y][i] = 1;
+        } else {
+            if (color != nboard[y][i][1]) {
+                table.rows[y].cells[i].classList.add("option");
+                legal_moves[y][i] = 1;
+            }
+            break;
+        }
+        
+    }
+
+    //look right
+    for (let i = x + 1; true; i++) {
+        //look right
+        if (i > width-1) {
+            i = 0;
+        }
+        if (nboard[y][i][0] == "0") {
+            table.rows[y].cells[i].classList.add("option");
+            legal_moves[y][i] = 1;
+        } else {
+            if (color != nboard[y][i][1]) {
+                table.rows[y].cells[i].classList.add("option");
+                legal_moves[y][i] = 1;
+            }
+            break;
+        }
+
     }
 }
