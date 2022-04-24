@@ -1,5 +1,6 @@
+//the functions add the possible move to the list of legal moves- "legal_moves"
+//and adds these cells to the "option" class
 function rook(y, x, color, nboard) {
-
     if (color == "b") {
         if (y == 0 && x == 0) {
             canCastleB[0] = false;
@@ -510,4 +511,8 @@ function portal(y, x, color, nboard) {
         }
 
     }
+}
+function beyblade(y, x, color, nboard){
+console.log("beyblade ");
+
 }

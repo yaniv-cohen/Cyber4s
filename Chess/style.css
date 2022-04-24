@@ -164,3 +164,15 @@ td{
     background-repeat: no-repeat;
     background-position: center;
 }
+.beybladeW{
+    background-image: url('white-beyblade.svg')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.beybladeB{
+    background-image: url('black-beyblade.svg')  ;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}

@@ -42,7 +42,7 @@ function dataBoardCreation(){
         [["r", "b"], ["n", "b"], ["b", "b"], ["q", "b"], ["k", "b"], ["b", "b"], ["n", "b"], ["r", "b"],],
         [["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"],],
         [["0", "0"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"], ["p", "b"], ["pr", "b"], ["0", "0"],],
-        [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],],
+        [["0", "0"], ["0", "0"], ["0", "0"], ["by", "w"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],],
         [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],],
         [["0", "0"], ["pr", "w"], ["p", "w"], ["0", "0"], ["0", "0"], ["p", "w"], ["0", "0"], ["0", "0"],],
         [["p", "w"], ["p", "w"], ["t", "w"], ["p", "w"], ["p", "w"], ["t", "w"], ["p", "w"], ["p", "w"],],
@@ -75,6 +75,7 @@ function dataBoardCreation(){
 
 function boardClick(y, x) {
     //on click
+    
     let type = nboard[y][x][0];
 
     let color = nboard[y][x][1]; //color of the current clicked cell
@@ -281,6 +282,9 @@ function get_class(type, color) {
         else if(type ="pr"){
             return 'portalB';
         }
+        else if(type ="by"){
+            return 'beybladeB';
+        }
     } else if (color == "w") {
         if (type == "k") {
             return "kingW";
@@ -299,6 +303,9 @@ function get_class(type, color) {
         }
         else if(type ="pr"){
             return 'portalW';
+        }
+        else if(type ="by"){
+            return 'beybladeW';
         }
     }
     return "";
@@ -345,6 +352,9 @@ function getLegalByPiece(y, x, type, color, nboard) {
         } else if (color == "b") {
             tankB(y, x, color, nboard);
         }
+    }
+    else if (type == "by") {
+            beyblade(y, x, color, nboard);
     }
 
 }
