@@ -512,12 +512,13 @@ function portal(y, x, color, nboard) {
     }
 }
 function beyblade(y, x, color, nboard){
-console.log("beyblade ");
 if (color=="w")
 {direction =beybladeDirectionW;
+    beybladeDirectionW%=4;
 }
 else if (color=="b")
 {direction =beybladeDirectionB;
+    beybladeDirectionB%=4;
 }
 switch (direction){
 case(0):
@@ -580,6 +581,73 @@ for (let i = x - 1; i >= 0; i--) {
     }
 }
 break;
+}
+if (y > 0) {
+    //top
+    //top left
+    if (
+        x > 0 &&
+        (nboard[y - 1][x - 1][0] == "0" || color != nboard[y - 1][x - 1][1]))
+    {
+        //top left
+
+        table.rows[y - 1].cells[x - 1].classList.add("option");
+        legal_moves[y - 1][x - 1] = 1;
+    }
+    //top stright
+    if (
+        (nboard[y - 1][x][0] == "0" || color != nboard[y - 1][x][1]) )
+     {
+        table.rows[y - 1].cells[x].classList.add("option");
+        legal_moves[y - 1][x] = 1;
+    }
+    //top right
+    if (
+        x < width - 1 &&
+        (nboard[y - 1][x + 1][0] == "0" || color != nboard[y - 1][x + 1][1]))
+     {
+        table.rows[y - 1].cells[x + 1].classList.add("option");
+        legal_moves[y - 1][x + 1] = 1;
+    }
+}
+if (y < height - 1) {
+    //bottom
+    if (
+        x > 0 &&
+        (nboard[y + 1][x - 1][0] == "0" || color != nboard[y + 1][x - 1][1])
+    ) {
+        table.rows[y + 1].cells[x - 1].classList.add("option");
+        legal_moves[y + 1][x - 1] = 1;
+    }
+    if (
+        (nboard[y + 1][x][0] == "0" || color != nboard[y + 1][x][1])
+    ) {
+        table.rows[y + 1].cells[x].classList.add("option");
+        legal_moves[y + 1][x] = 1;
+    }
+    if (
+        x < width - 1 &&
+        (nboard[y + 1][x + 1][0] == "0" || color != nboard[y + 1][x + 1][1])
+    ) {
+        table.rows[y + 1].cells[x + 1].classList.add("option");
+        legal_moves[y + 1][x + 1] = 1;
+    }
+}
+if (
+    x > 0 &&
+    (nboard[y][x - 1][0] == "0" || color != nboard[y][x - 1][1])
+) {
+    //left
+    table.rows[y].cells[x - 1].classList.add("option");
+    legal_moves[y][x - 1] = 1;
+}
+if (
+    x < width - 1 &&
+    (nboard[y][x + 1][0] == "0" || color != nboard[y][x + 1][1])
+) {
+    //right
+    table.rows[y].cells[x + 1].classList.add("option");
+    legal_moves[y][x + 1] = 1;
 }
 }
 

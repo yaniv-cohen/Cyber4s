@@ -16,73 +16,22 @@ let body = document.getElementsByTagName("body")[0];
 let nboard =[];
 let board = [];
 let legal_moves =[];
-dataBoardCreation();
-// for (let i = 0; i < height; i++) {
-//     board.push([]);
-//     for (let k = 0; k < width; k++) {
-//         board[i][k] = new piece(i, k, nboard[i][k][0], nboard[i][k][1]);
-//     }
-// }
-
-// class piece {
-//     constructor(type, color) {
-//         this.type = type;
-//         this.color = color;
-//     }
-// }
-// if i wanted to use objects, but it is inferior because it loses some of the data that is available - the position of each piece.
-    // for (let i = 0; i < height; i++) {
-    //     board.push([]);
-    //     for (let k = 0; k < width; k++) {
-    //         board[i][k] = new piece(i, k, nboard[i][k][0], nboard[i][k][1]);
-    //     }
-    // }
-
-function dataBoardCreation(){
-    nboard= [
-        [["r", "b"], ["n", "b"], ["b", "b"], ["q", "b"], ["k", "b"], ["b", "b"], ["n", "b"], ["r", "b"],],
-        [["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"],],
-        [["0", "0"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"], ["p", "b"], ["pr", "b"], ["0", "0"],],
-        [["0", "0"], ["0", "0"], ["0", "0"], ["by", "w"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],],
-        [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],],
-        [["0", "0"], ["pr", "w"], ["p", "w"], ["0", "0"], ["0", "0"], ["p", "w"], ["0", "0"], ["0", "0"],],
-        [["p", "w"], ["p", "w"], ["t", "w"], ["p", "w"], ["p", "w"], ["t", "w"], ["p", "w"], ["p", "w"],],
-        [["r", "w"], ["n", "w"], ["b", "w"], ["q", "w"], ["k", "w"], ["b", "w"], ["n", "w"], ["r", "w"],],
-    ];
-    previous_board=[
-        [["r", "b"], ["n", "b"], ["b", "b"], ["q", "b"], ["k", "b"], ["b", "b"], ["n", "b"], ["r", "b"],],
-        [["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"], ["t", "b"], ["p", "b"], ["p", "b"],],
-        [["0", "0"], ["0", "0"], ["p", "b"], ["0", "0"], ["0", "0"], ["p", "b"], ["pr", "b"], ["0", "0"],],
-        [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],],
-        [["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"], ["0", "0"],],
-        [["0", "0"], ["pr", "w"], ["p", "w"], ["0", "0"], ["0", "0"], ["p", "w"], ["0", "0"], ["0", "0"],],
-        [["p", "w"], ["p", "w"], ["t", "w"], ["p", "w"], ["p", "w"], ["t", "w"], ["p", "w"], ["p", "w"],],
-        [["r", "w"], ["n", "w"], ["b", "w"], ["q", "w"], ["k", "w"], ["b", "w"], ["n", "w"], ["r", "w"],],
-    ]; //should use =nboard, but don't know if it is a pointer or not and haveno time.
-    legal_moves = [
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-    ];
-}
 
 
 
 
+
+
+let previous_type = last_selection[2];
+let previous_color = last_selection[3];
 function boardClick(y, x) {
     //on click
     let type = nboard[y][x][0];
-
     let color = nboard[y][x][1]; //color of the current clicked cell
-    let previous_type = last_selection[2];
-    let previous_color = last_selection[3];
+     previous_type = last_selection[2];
+     previous_color = last_selection[3];
     let legal = false;
-    let sel_list = [];
+    let selected_list = [];
     if (y == last_selection[0] && x == last_selection[1]) {
         sameCellClick(y, x);
     }
@@ -90,37 +39,13 @@ function boardClick(y, x) {
         color == current_player ||
         previous_type == "0" ||
         legal_moves[y][x] != 0
-    ) {
+    ) { //if can select or move here
+        
         if (legal_moves[y][x] != 0) {
             if (previous_type != 0) {
                 //if last click was on a unit
-                previous_board=nboard;
-                if (previous_type=="p"&&handlePawnSpecialMoves(y, x, previous_color)) {
-                    //did this pawn move?
-                    previous_type ="q";
-                    
-                }
-                else if (previous_type == "k") {
-                    //if i moved a king
-                    handleKingSpecialMoves(y, x, nboard, previous_type, previous_color);
-                }
-                else if (previous_type == "by") {
-                    //if i moved a beyblade
-                    if (previous_color=="w"){
-                        beybladeDirectionW++;
-                        let transformNum ="rotate(" +90*beybladeDirectionW +"deg)";
-                        console.log("transformNum: " + transformNum);
-                        
-                        table.rows[y].cells[x].style.transform+=transformNum;
-                    }
-                    else if(previous_color=="b"){
-                        beybladeDirectionB++;
-                        let transform =90*beybladeDirectionW;
-                        table.rows[y].cells[x].style.transform=transformNum;
-                    }
-                }
-               
-                    moveActivePiece(y, x, previous_type, previous_color);
+                console.log(legal_moves);
+                moveHandler(y,x)
             }
             var cusid_ele = document.getElementsByClassName("option"); //wipe all options
             while (cusid_ele.length > 0) {
@@ -137,9 +62,9 @@ function boardClick(y, x) {
                 [0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0],
             ];
-            sel_list = document.getElementsByClassName("selected"); //wipe selection
-            if (sel_list.length > 0) {
-                let sel_item = sel_list[0]; //clear old selected
+            selected_list = document.getElementsByClassName("selected"); //wipe selection
+            if (selected_list.length > 0) {
+                let sel_item = selected_list[0]; //clear old selected
                 sel_item.classList.remove("selected");
             }
             if (type == "k") {
@@ -152,35 +77,36 @@ function boardClick(y, x) {
             changePlayer();
         } else if (type != "0") {
             //if i hit a non-empty cell that is not a valid move
-            let cusid_ele = document.getElementsByClassName("option"); //wipe all options
-            while (cusid_ele.length > 0) {
-                var item = cusid_ele[0];
-                item.classList.remove("option");
-            }
+            emptyAllSelection();
 
-            sel_list = document.getElementsByClassName("selected"); //wipe selection
-            if (sel_list.length > 0) {
+
+            selected_list = document.getElementsByClassName("selected"); //wipe selection
+            if (selected_list.length > 0) {
                 //if i already clicked
 
-                let sel_item = sel_list[0]; //clear old selected
+                let sel_item = selected_list[0]; //clear old selected
                 sel_item.classList.remove("selected");
             }
 
             if (
-                y != last_selection[0] ||
-                x != last_selection[1] ||
-                sel_list.length == 0
+                (y != last_selection[0] ||
+                x != last_selection[1] ) &&
+                type!="0"
             ) {
                 //if clicked on diffrent unit of my color,
                 table.rows[y].cells[x].classList.toggle("selected");
+                
                 getLegalByPiece(y, x, type, color, nboard);
                 last_selection = [y, x, type, color]; //remember what you clicked for the next click , position and color of last cell
-            } else {
-                table.rows[y].cells[x].classList.remove("selected");
-                // let sel_item = sel_list[0];
-                //     sel_item.classList.remove('selected');
-            }
+            } 
         }
+    }
+    else {
+        console.log("reset selection");
+        emptyAllSelection();
+        table.rows[last_selection[0]].cells[last_selection[1]].classList.remove("selected");
+        // let sel_item = sel_list[0];
+        //     sel_item.classList.remove('selected');
     }
 }
 function sameCellClick(y, x) {
@@ -203,80 +129,7 @@ function sameCellClick(y, x) {
         item.classList.remove("option");
     }
 }
-function handlePawnSpecialMoves(y, x, previous_color) {
-    console.log("previous_color is " + previous_color + y);
-    if (previous_color == "w" && y == 0) {
-        return ("q");
 
-    } else if (previous_color == "b" && y == height - 1) {
-        return('q');
-    }
-    else if (y == 1 || y == height - 1) {
-        //did this pawn move?
-        if (previous_color == "w") {
-            movedW[x] = 1;
-        } else if (previous_color == "b") {
-            movedB[x] = 1;
-        }
-    }
-}
-function handleKingSpecialMoves(y, x, nboard, previous_type, previous_color) {
-    if (previous_color == "b") {
-        //castle black
-        if (x == 2) {
-            nboard[0][x + 1][0] = "r";
-            nboard[0][x + 1][1] = "b";
-            table.rows[y].cells[x + 1].classList.add("rookB");
-            nboard[0][0][0] = "0";
-            nboard[0][0][1] = "0";
-            table.rows[0].cells[0].classList.remove("rookB");
-        } else if (x == width + 2) {
-            nboard[0][x - 1][0] = "r";
-            nboard[0][x - 1][1] = "b";
-            table.rows[y].cells[x - 1].classList.add("rookB");
-            nboard[0][width - 1][0] = "0";
-            nboard[0][width - 1][1] = "0";
-            table.rows[0].cells[width - 1].classList.remove("rookB");
-        }
-        canCastleB[0] = false;
-        canCastleB[1] = false;
-    } else if (previous_color == "w") {
-        //castle black
-        if (x == last_selection[1] - 2) {
-            nboard[y][x + 1][0] = "r";
-            nboard[y][x + 1][1] = "w";
-            table.rows[y].cells[x + 1].classList.add("rookW");
-            nboard[y][0][0] = "0";
-            nboard[y][0][1] = "0";
-            table.rows[y].cells[0].classList.remove("rookW");
-        } else if (x == last_selection[1] + 2) {
-            nboard[y][x - 1][0] = "r";
-            nboard[y][x - 1][1] = "w";
-            table.rows[y].cells[x - 1].classList.add("rookW");
-            nboard[y][width - 1][0] = "0";
-            nboard[y][width - 1][1] = "0";
-            table.rows[y].cells[width - 1].classList.remove("rookW");
-        }
-        canCastleW[0] = false;
-        canCastleW[1] = false;
-    }
-}
-
-function moveActivePiece(y, x, previous_type, previous_color) {
-    nboard[y][x][0] = previous_type; //copy the old unit array to the new location
-    nboard[y][x][1] = previous_color;
-    nboard[last_selection[0]][last_selection[1]] = ["0", "0"]; //empty the last unit array
-    let newClassList = "";
-    if ((x + y) % 2 == 0) {
-        newClassList = "cellW ";
-    } else {
-        newClassList = "cellB ";
-    }
-    newClassList += get_class(previous_type, previous_color);
-    table.rows[y].cells[x].className = "";
-    table.rows[y].cells[x].className = newClassList;
-    resetCellClass(last_selection[0], last_selection[1], table);
-}
 function get_class(type, color) {
     if (color == "b") {
         if (type == "k") {
@@ -335,8 +188,24 @@ function resetCellClass(y, x, table) {
     }
     table.rows[y].cells[x].className = oldClassList;
 }
-
+function emptyAllSelection(){
+    let cusid_ele = document.getElementsByClassName("option"); //wipe all options
+    while (cusid_ele.length > 0) {
+        var item = cusid_ele[0];
+        item.classList.remove("option");
+    }
+}
 function getLegalByPiece(y, x, type, color, nboard) {
+    legal_moves = [
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+    ];
     if (type == "r") {
         //handle rook
         rook(y, x, color, nboard);
@@ -360,7 +229,6 @@ function getLegalByPiece(y, x, type, color, nboard) {
         console.log("call portal");
         portal(y, x, color, nboard);
     }
-
     else if (type == "t") {
         if (color == "w") {
             tankW(y, x, color, nboard);
