@@ -181,8 +181,9 @@ function sameCellClick(y, x) {
         [0, 0, 0, 0, 0, 0, 0, 0],
     ];
     var cusid_ele = document.getElementsByClassName("option"); //wipe all options
-    while (cusid_ele.length > 0) {
-        var item = cusid_ele[0];
+    var optionsList = document.getElementsByClassName("option"); //wipe all options
+    while (optionsList.length > 0) {
+        var item = optionsList[0];
         item.classList.remove("option");
     }
 }
