@@ -438,7 +438,6 @@ function tankB(y, x, color, nboard) {
             //destroy up right
             legal_moves[y + 1][x + 1] = 1;
             table.rows[y + 1].cells[x + 1].classList.add("option");
-
         }
     }
 }
@@ -514,5 +513,76 @@ function portal(y, x, color, nboard) {
 }
 function beyblade(y, x, color, nboard){
 console.log("beyblade ");
-
+if (color=="w")
+{direction =beybladeDirectionW;
 }
+else if (color=="b")
+{direction =beybladeDirectionB;
+}
+switch (direction){
+case(0):
+for (let i = y - 1; i >= 0; i--) {
+    //look up
+    if (nboard[i][x][0] == "0") {
+        table.rows[i].cells[x].classList.add("option");
+        legal_moves[i][x] = 1;
+    } else {
+        if (color != nboard[i][x][1]) {
+            table.rows[i].cells[x].classList.add("option");
+            legal_moves[i][x] = 1;
+        }
+        break;
+    }
+}
+break;
+case(1):
+for (let i = x + 1; i < width; i++) {
+    //look right
+    if (nboard[y][i][0] == "0") {
+        table.rows[y].cells[i].classList.add("option");
+        legal_moves[y][i] = 1;
+    } else {
+        if (color != nboard[y][i][1]) {
+            table.rows[y].cells[i].classList.add("option");
+            legal_moves[y][i] = 1;
+        }
+        break;
+    }
+}
+break;
+case(2):
+for (let i = y + 1; i < height; i++) {
+    //look down
+    if (nboard[i][x][0] == "0") {
+        table.rows[i].cells[x].classList.add("option");
+        legal_moves[i][x] = 1;
+    } else {
+        if (color != nboard[i][x][1]) {
+            table.rows[i].cells[x].classList.add("option");
+            legal_moves[i][x] = 1;
+        }
+        break;
+    }
+}
+break;
+case(3):
+for (let i = x - 1; i >= 0; i--) {
+    //look left
+    if (nboard[y][i][0] == "0") {
+        table.rows[y].cells[i].classList.add("option");
+        legal_moves[y][i] = 1;
+    } else {
+        if (color != nboard[y][i][1]) {
+            table.rows[y].cells[i].classList.add("option");
+            legal_moves[y][i] = 1;
+        }
+        break;
+    }
+}
+break;
+}
+}
+
+
+
+

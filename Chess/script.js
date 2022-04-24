@@ -7,9 +7,10 @@ let canCastleB = [true, true]; //todo add cstle
 let last_selection = ["", "", "", ""];
 let movedB = [0, 0, 0, 0, 0, 0, 0, 0]; //did the piece in the pawn row move? 0=no 1=yes
 let movedW = [0, 0, 0, 0, 0, 0, 0, 0];//did the piece in the pawn row move? 0=no 1=yes
+let beybladeDirectionW =0;
+let beybladeDirectionB =0;
 let current_player = "w";
 let previous_board =[];
-
 let turn_div = document.getElementById("turnDiv");
 let body = document.getElementsByTagName("body")[0];
 let nboard =[];
@@ -75,7 +76,6 @@ function dataBoardCreation(){
 
 function boardClick(y, x) {
     //on click
-    
     let type = nboard[y][x][0];
 
     let color = nboard[y][x][1]; //color of the current clicked cell
@@ -103,6 +103,21 @@ function boardClick(y, x) {
                 else if (previous_type == "k") {
                     //if i moved a king
                     handleKingSpecialMoves(y, x, nboard, previous_type, previous_color);
+                }
+                else if (previous_type == "by") {
+                    //if i moved a beyblade
+                    if (previous_color=="w"){
+                        beybladeDirectionW++;
+                        let transformNum ="rotate(" +90*beybladeDirectionW +"deg)";
+                        console.log("transformNum: " + transformNum);
+                        
+                        table.rows[y].cells[x].style.transform+=transformNum;
+                    }
+                    else if(previous_color=="b"){
+                        beybladeDirectionB++;
+                        let transform =90*beybladeDirectionW;
+                        table.rows[y].cells[x].style.transform=transformNum;
+                    }
                 }
                
                     moveActivePiece(y, x, previous_type, previous_color);
@@ -279,10 +294,10 @@ function get_class(type, color) {
         } else if (type == "t") {
             return "tankB";
         }
-        else if(type ="pr"){
+        else if(type =="pr"){
             return 'portalB';
         }
-        else if(type ="by"){
+        else if(type =="by"){
             return 'beybladeB';
         }
     } else if (color == "w") {
@@ -301,10 +316,10 @@ function get_class(type, color) {
         } else if (type == "t") {
             return "tankW";
         }
-        else if(type ="pr"){
+        else if(type =="pr"){
             return 'portalW';
         }
-        else if(type ="by"){
+        else if(type =="by"){
             return 'beybladeW';
         }
     }
