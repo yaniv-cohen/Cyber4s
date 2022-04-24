@@ -84,9 +84,6 @@ function boardClick(y, x) {
     let sel_list = [];
     if (y == last_selection[0] && x == last_selection[1]) {
         sameCellClick(y, x);
-
-
-
     }
     else if (
         color == current_player ||
@@ -172,6 +169,7 @@ function boardClick(y, x) {
 }
 function sameCellClick(y, x) {
     table.rows[y].cells[x].classList.remove('selected');
+    last_selection=["","","",""];
     legal_moves = [
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
