@@ -1,0 +1,94 @@
+td{
+width:50px;
+height:50px;
+
+}
+
+.blackrook{
+background-image: url('images/black/rook.png');
+background-size: 50px;
+background-repeat: no-repeat;
+background-position: center;
+}
+.blackknight{
+    background-image: url('images/black/knight.png');
+    background-size: 50px;
+background-repeat: no-repeat;
+background-position: center;
+}
+.blackbishop{
+    background-image: url('images/black/bishop.png');
+    background-size: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.blackqueen{
+    background-image: url('images/black/queen.png');
+    background-size: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.blackking{
+    background-image: url('images/black/king.png');
+    background-size: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.blackpawn{
+    background-image: url('images/black/pawn.png');
+    background-size: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.whiterook{
+    background-image: url('images/white/rook.png');
+    background-size: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    }
+    .whiteknight{
+        background-image: url('images/white/knight.png');
+        background-size: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    }
+    .whitebishop{
+        background-image: url('images/white/bishop.png');
+        background-size: 50px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .whitequeen{
+        background-image: url('images/white/queen.png');
+        background-size: 50px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .whiteking{
+        background-image: url('images/white/king.png');
+        background-size: 50px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .whitepawn{
+        background-image: url('images/white/pawn.png');
+        background-size: 50px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+.light-cell{
+    background-color: aliceblue;
+
+    background-repeat: no-repeat;
+}
+.dark-cell{
+    background-color:dimgray;
+}
+.possible-move{
+    background-color: chartreuse;
+}
+.selected{
+    background-color: darkgreen;
+}
