@@ -1,6 +1,7 @@
 let height = 8;
 let width = 8;
-const table = document.createElement("table");
+let table = document.createElement("table");
+table.setAttribute('id','table');
 document.getElementById("chessBoard").appendChild(table);
 let canCastleW = [true, true]; //todo add cstle
 let canCastleB = [true, true]; //todo add cstle
@@ -16,7 +17,14 @@ let body = document.getElementsByTagName("body")[0];
 let nboard = [];
 let board = [];
 let legal_moves = [];
-
+const KING = "k";
+const QUEEN = "q";
+const BISHOP = "b";
+const KNIGHT = "n";
+const ROOK = "r";
+const PAWN = "p";
+const WHITE = "w";
+const BLACK = "b";
 
 
 
@@ -24,125 +32,22 @@ let legal_moves = [];
 
 let previous_type = last_selection[2];
 let previous_color = last_selection[3];
-function boardClick(y, x) {
-    //on click
-    let type = nboard[y][x][0];
-    let color = nboard[y][x][1]; //color of the current clicked cell
-    previous_type = last_selection[2];
-    previous_color = last_selection[3];
-    let legal = false;
-    let selected_list = [];
-    if (y == last_selection[0] && x == last_selection[1]) {
-        sameCellClick(y, x);
-    }
-    else if (
-        color == current_player ||
-        previous_type == "0" ||
-        legal_moves[y][x] != 0
-    ) { //if can select or move here
-
-        if (legal_moves[y][x] != 0) {
-            if (previous_type != 0) {
-                //if last click was on a unit
-                console.log(legal_moves);
-                moveHandler(y, x)
-            }
-            var cusid_ele = document.getElementsByClassName("option"); //wipe all options
-            while (cusid_ele.length > 0) {
-                var item = cusid_ele[0];
-                item.classList.remove("option");
-            }
-            legal_moves = [
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0],
-            ];
-            selected_list = document.getElementsByClassName("selected"); //wipe selection
-            if (selected_list.length > 0) {
-                let sel_item = selected_list[0]; //clear old selected
-                sel_item.classList.remove("selected");
-            }
-            if (type == "k") {
-                if (color == "w") {
-                    alert("Black Won");
-                } else {
-                    alert("White Won");
-                }
-            }
-            changePlayer();
-        } else if (type != "0") {
-            //if i hit a non-empty cell that is not a valid move
-            emptyAllSelection();
 
 
-            selected_list = document.getElementsByClassName("selected"); //wipe selection
-            if (selected_list.length > 0) {
-                //if i already clicked
-
-                let sel_item = selected_list[0]; //clear old selected
-                sel_item.classList.remove("selected");
-            }
-
-            if (
-                (y != last_selection[0] ||
-                    x != last_selection[1]) &&
-                type != "0"
-            ) {
-                //if clicked on diffrent unit of my color,
-                table.rows[y].cells[x].classList.toggle("selected");
-
-                getLegalMovesByPiece(y, x, type, color, nboard);
-                last_selection = [y, x, type, color]; //remember what you clicked for the next click , position and color of last cell
-            }
-        }
-    }
-    else {
-        console.log("reset selection");
-        emptyAllSelection();
-        table.rows[last_selection[0]].cells[last_selection[1]].classList.remove("selected");
-        // let sel_item = sel_list[0];
-        //     sel_item.classList.remove('selected');
-    }
-}
-function sameCellClick(y, x) {
-    table.rows[y].cells[x].classList.remove('selected');
-    last_selection = ["", "", "", ""];
-    legal_moves = [
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-    ];
-    var cusid_ele = document.getElementsByClassName("option"); //wipe all options
-    var optionsList = document.getElementsByClassName("option"); //wipe all options
-    while (optionsList.length > 0) {
-        var item = optionsList[0];
-        item.classList.remove("option");
-    }
-}
 
 function get_class(type, color) {
-    if (color == "b") {
-        if (type == "k") {
+    if (color === BLACK) {
+        if (type === KING) {
             return "kingB";
-        } else if (type == "q") {
+        } else if (type === QUEEN) {
             return "queenB";
-        } else if (type == "b") {
+        } else if (type == BISHOP) {
             return "bishopB";
-        } else if (type == "n") {
+        } else if (type === KNIGHT) {
             return "knightB";
-        } else if (type == "r") {
+        } else if (type === ROOK) {
             return "rookB";
-        } else if (type == "p") {
+        } else if (type === PAWN) {
             return "pawnB";
         } else if (type == "t") {
             return "tankB";
@@ -153,18 +58,18 @@ function get_class(type, color) {
         else if (type == "by") {
             return 'beybladeB';
         }
-    } else if (color == "w") {
-        if (type == "k") {
+    } else if (color == WHITE) {
+        if (type === KING) {
             return "kingW";
-        } else if (type == "q") {
+        } else if (type === QUEEN) {
             return "queenW";
-        } else if (type == "b") {
+        } else if (type == BISHOP) {
             return "bishopW";
-        } else if (type == "n") {
+        } else if (type === KNIGHT) {
             return "knightW";
-        } else if (type == "r") {
+        } else if (type === ROOK) {
             return "rookW";
-        } else if (type == "p") {
+        } else if (type === PAWN) {
             return "pawnW";
         } else if (type == "t") {
             return "tankW";
@@ -206,22 +111,28 @@ function getLegalMovesByPiece(y, x, type, color, nboard) {
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
     ];
-    if (type == "r") {
+    if (type === ROOK) {
         //handle rook
-        rook(y, x, color, nboard);
-    } else if (type == "b") {
+        let moves =rook(y, x, color, nboard);
+        for(let move of moves)
+        {
+            // table.children.classList.add('option');
+            // document.getElementsByTagName('table')[0].rows(move[0]).cells(move[1]).classList.add('option');
+            legal_moves[move[0]][move[1]] =1;
+        }
+    } else if (type == BISHOP) {
         //handle bishop
         bishop(y, x, color, nboard);
-    } else if (type == "q") {
+    } else if (type === QUEEN) {
         queen(y, x, color, nboard);
-    } else if (type == "k") {
+    } else if (type === KING) {
         king(y, x, color, nboard);
-    } else if (type == "n") {
+    } else if (type === KNIGHT) {
         knight(y, x, color, nboard);
-    } else if (type == "p") {
-        if (color == "w") {
+    } else if (type === PAWN) {
+        if (color == WHITE) {
             pawnW(y, x, color, nboard);
-        } else if (color == "b") {
+        } else if (color ===BLACK) {
             pawnB(y, x, color, nboard);
         }
     }
@@ -230,9 +141,9 @@ function getLegalMovesByPiece(y, x, type, color, nboard) {
         portal(y, x, color, nboard);
     }
     else if (type == "t") {
-        if (color == "w") {
+        if (color == WHITE) {
             tankW(y, x, color, nboard);
-        } else if (color == "b") {
+        } else if (color === BLACK) {
             tankB(y, x, color, nboard);
         }
     }
@@ -240,4 +151,17 @@ function getLegalMovesByPiece(y, x, type, color, nboard) {
         beyblade(y, x, color, nboard);
     }
 
+}
+
+
+
+function getKingCoordinates(color, nboard) {
+    for (let col = 0; col < height; col++) {
+        for (let row = 0; row < width; row++) {
+            if (nboard[row][col][0] === king && nboard[row][col][0] === color) {
+                return ([y, x]);
+            }
+
+        }
+    }
 }

@@ -19,14 +19,14 @@
         <div>
             <h1>CHESS</h1>
             <ul>
-                <input type="checkbox" class="unit_options" name="tank" value="tank">
+                <input id="tank" type="checkbox" class="unit_options" name="tank" value="tank">
                 <label for="tank">Tank</label>
-                <input type="checkbox" class="unit_options" name="portal" value="portal">
+                <input id="portal"type="checkbox" class="unit_options" name="portal" value="portal">
                 <label for="portal">Portal</label>
-                <input type="checkbox" class="unit_options" name="beyblade" value="beyblade">
+                <input id="beyblade" type="checkbox" class="unit_options" name="beyblade" value="beyblade">
                 <label for="beyblade">Beyblade</label>
             </ul>
-            <button>Genreate Board</button>
+            <button onclick="generate()">Genreate Board</button>
 
         </div>
         <br>
@@ -40,6 +40,8 @@
         </div>
         <div id="endDiv"></div>
     </main>
+    <script src="javascript/boardSettings.js"></script>
+    <script src="javascript/BoardClick.js"></script>
     <script src="javascript/threatened.js"></script>
     <script src="javascript/move-handler.js"></script>
     <script src="javascript/changePlayer.js"></script>

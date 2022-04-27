@@ -1,6 +1,7 @@
 //the functions add the possible move to the list of legal moves- "legal_moves"
 //and adds these cells to the "option" class
 function rook(y, x, color, nboard) {
+    let optionsList=[];
     if (color == "b") {
         if (y == 0 && x == 0) {
             canCastleB[0] = false;
@@ -19,10 +20,12 @@ function rook(y, x, color, nboard) {
     for (let i = y - 1; i >= 0; i--) {
         //look up
         if (nboard[i][x][0] == "0") {
+            optionsList.push([i,x]);
             table.rows[i].cells[x].classList.add("option");
             legal_moves[i][x] = 1;
         } else {
             if (color != nboard[i][x][1]) {
+                optionsList.push([i,x]);
                 table.rows[i].cells[x].classList.add("option");
                 legal_moves[i][x] = 1;
             }
@@ -33,10 +36,12 @@ function rook(y, x, color, nboard) {
     for (let i = y + 1; i < height; i++) {
         //look down
         if (nboard[i][x][0] == "0") {
+            optionsList.push([i,x]);
             table.rows[i].cells[x].classList.add("option");
             legal_moves[i][x] = 1;
         } else {
             if (color != nboard[i][x][1]) {
+                optionsList.push([i,x]);
                 table.rows[i].cells[x].classList.add("option");
                 legal_moves[i][x] = 1;
             }
@@ -46,86 +51,106 @@ function rook(y, x, color, nboard) {
     for (let i = x - 1; i >= 0; i--) {
         //look left
         if (nboard[y][i][0] == "0") {
+            optionsList.push([y,i]);
             table.rows[y].cells[i].classList.add("option");
             legal_moves[y][i] = 1;
         } else {
             if (color != nboard[y][i][1]) {
+                optionsList.push([y,i]);
                 table.rows[y].cells[i].classList.add("option");
                 legal_moves[y][i] = 1;
             }
             break;
         }
+        
     }
 
     for (let i = x + 1; i < width; i++) {
         //look right
         if (nboard[y][i][0] == "0") {
+            optionsList.push([y,i]);
             table.rows[y].cells[i].classList.add("option");
             legal_moves[y][i] = 1;
         } else {
             if (color != nboard[y][i][1]) {
+                optionsList.push([y,i]);
                 table.rows[y].cells[i].classList.add("option");
                 legal_moves[y][i] = 1;
             }
             break;
         }
     }
+    return optionsList;
 }
 function bishop(y, x, color, nboard) {
-let currentLocationY = 0;
-let currentLocationX = 0;
-    for ( currentLocationY=y- 1 , currentLocationX = x-1; 
-        currentLocationY >=0 && currentLocationX>=0 ; 
-        currentLocationY--, currentLocationX--) {
-        
-        if (nboard[currentLocationY][currentLocationX][0] == "0") {
+    console.log(x);
+    let currentY;
+    let currentX;
+    for (currentY = y - 1, currentX = x - 1;
+        currentY >= 0 && currentX >= 0;
+        currentY--, currentX--) {
+
+        if (nboard[currentY][currentX][0] == "0") {
             //up left
-            table.rows[y - i - 1].cells[x - i - 1].classList.add("option");
-            legal_moves[y - i - 1][x - i - 1] = 1;
+            table.rows[currentY].cells[currentX].classList.add("option");
+            legal_moves[currentY][currentX] = 1;
         } else {
-            if (color != nboard[y - i - 1][x - i - 1][1]) {
-                table.rows[y - i - 1].cells[x - i - 1].classList.add("option");
-                legal_moves[y - i - 1][x - i - 1] = 1;
+            if (color != nboard[currentY][currentX][1]) {
+                table.rows[currentY].cells[currentX].classList.add("option");
+                legal_moves[currentY][currentX] = 1;
             }
             break;
         }
     }
-    for (let i = 0; i < y && i < width - x - 1; i++) {
+    for (
+        currentY = y - 1, currentX = x + 1;
+        currentY >= 0 && currentX < width;
+        currentY--, currentX++) {
         //up right
 
-        if (nboard[y - i - 1][x + i + 1][0] == "0") {
-            table.rows[y - i - 1].cells[x + i + 1].classList.add("option");
-            legal_moves[y - i - 1][x + i + 1] = 1;
+        if (nboard[currentY][currentX][0] == "0") {
+            table.rows[currentY].cells[currentX].classList.add("option");
+            legal_moves[currentY][currentX] = 1;
         } else {
-            if (color != nboard[y - i - 1][x + i + 1][1]) {
-                table.rows[y - i - 1].cells[x + i + 1].classList.add("option");
-                legal_moves[y - i - 1][x + i + 1] = 1;
+            if (color != nboard[currentY][currentX][1]) {
+                table.rows[currentY].cells[currentX].classList.add("option");
+                legal_moves[currentY][currentX] = 1;
             }
             break;
         }
     }
 
-    for (let i = 0; i < height - y - 1 && i < width - x - 1; i++) {
+    for (currentY = y+1,
+        currentX =x-1;
+       currentY<height&&
+       currentX>=0;
+        currentY++,
+        currentX--) {
         //down right
-        if (nboard[y + i + 1][x + i + 1][0] == "0") {
-            table.rows[y + i + 1].cells[x + i + 1].classList.add("option");
-            legal_moves[y + i + 1][x + i + 1] = 1;
+        if (nboard[currentY][currentX][0] == "0") {
+            table.rows[currentY].cells[currentX].classList.add("option");
+            legal_moves[currentY][currentX] = 1;
         } else {
-            if (color != nboard[y + i + 1][x + i + 1][1]) {
-                table.rows[y + i + 1].cells[x + i + 1].classList.add("option");
-                legal_moves[y + i + 1][x + i + 1] = 1;
+            if (color != nboard[currentY][currentX][1]) {
+                table.rows[currentY].cells[currentX].classList.add("option");
+                legal_moves[currentY][currentX] = 1;
             }
             break;
         }
     }
-    for (let i = 0; i < height - y - 1 && i < x; i++) {
-        if (nboard[y + i + 1][x - i - 1][0] == "0") {
-            table.rows[y + i + 1].cells[x - i - 1].classList.add("option");
-            legal_moves[y + i + 1][x - i - 1] = 1;
+    for (currentY = y+1,
+        currentX =x+1;
+       currentY<height&&
+       currentX<width;
+        currentY++,
+        currentX++) {
+        if (nboard[currentY][currentX][0] == "0") {
+            table.rows[currentY].cells[currentX].classList.add("option");
+            legal_moves[currentY][currentX] = 1;
         } else {
-            if (color != nboard[y + i + 1][x - i - 1][1]) {
-                table.rows[y + i + 1].cells[x - i - 1].classList.add("option");
-                legal_moves[y + i + 1][x - i - 1] = 1;
+            if (color != nboard[currentY][currentX][1]) {
+                table.rows[currentY].cells[currentX].classList.add("option");
+                legal_moves[currentY][currentX] = 1;
             }
             break;
         }
@@ -390,9 +415,8 @@ function tankW(y, x, color, nboard) {
     if (y > 0) {
         legal_moves[y - 1][x] = 1; //destroy up
         table.rows[y - 1].cells[x].classList.add("option");
-        if(y>1 && legal_moves[y - 1][x][1] == "w")
-        {
-            
+        if (y > 1 && legal_moves[y - 1][x][1] == "w") {
+
             table.rows[y - 1].cells[x].classList.add("option");
         }
         if (x > 0) {
@@ -406,6 +430,7 @@ function tankW(y, x, color, nboard) {
             table.rows[y - 1].cells[x + 1].classList.add("option");
         }
     }
+    //TO DO: tank destroy
     // else {
     //     legal_moves[height - 1][x] = 1; //destroy up
     //     table.rows[height - 1].cells[x].classList.add("option");
@@ -453,7 +478,7 @@ function portal(y, x, color, nboard) {
         if (nboard[y + 1][x][0] == "0") {
             legal_moves[y + 1][x] = 1;
             table.rows[y + 1].cells[x].classList.add("option");
-            
+
         } else {
             if (color != nboard[y + 1][x][1]) {
                 legal_moves[y + 1][x] = 1;
@@ -492,13 +517,13 @@ function portal(y, x, color, nboard) {
             }
             break;
         }
-        
+
     }
 
     //look right
     for (let i = x + 1; true; i++) {
         //look right
-        if (i > width-1) {
+        if (i > width - 1) {
             i = 0;
         }
         if (nboard[y][i][0] == "0") {
@@ -514,144 +539,141 @@ function portal(y, x, color, nboard) {
 
     }
 }
-function beyblade(y, x, color, nboard){
-if (color=="w")
-{direction =beybladeDirectionW;
-    beybladeDirectionW%=4;
-}
-else if (color=="b")
-{direction =beybladeDirectionB;
-    beybladeDirectionB%=4;
-}
-switch (direction){
-case(0):
-for (let i = y - 1; i >= 0; i--) {
-    //look up
-    if (nboard[i][x][0] == "0") {
-        table.rows[i].cells[x].classList.add("option");
-        legal_moves[i][x] = 1;
-    } else {
-        if (color != nboard[i][x][1]) {
-            table.rows[i].cells[x].classList.add("option");
-            legal_moves[i][x] = 1;
-        }
-        break;
+function beyblade(y, x, color, nboard) {
+    if (color == "w") {
+        direction = beybladeDirectionW;
+        beybladeDirectionW %= 4;
     }
-}
-break;
-case(1):
-for (let i = x + 1; i < width; i++) {
-    //look right
-    if (nboard[y][i][0] == "0") {
-        table.rows[y].cells[i].classList.add("option");
-        legal_moves[y][i] = 1;
-    } else {
-        if (color != nboard[y][i][1]) {
-            table.rows[y].cells[i].classList.add("option");
-            legal_moves[y][i] = 1;
-        }
-        break;
+    else if (color == "b") {
+        direction = beybladeDirectionB;
+        beybladeDirectionB %= 4;
     }
-}
-break;
-case(2):
-for (let i = y + 1; i < height; i++) {
-    //look down
-    if (nboard[i][x][0] == "0") {
-        table.rows[i].cells[x].classList.add("option");
-        legal_moves[i][x] = 1;
-    } else {
-        if (color != nboard[i][x][1]) {
-            table.rows[i].cells[x].classList.add("option");
-            legal_moves[i][x] = 1;
-        }
-        break;
+    switch (direction) {
+        case (0):
+            for (let i = y - 1; i >= 0; i--) {
+                //look up
+                if (nboard[i][x][0] == "0") {
+                    table.rows[i].cells[x].classList.add("option");
+                    legal_moves[i][x] = 1;
+                } else {
+                    if (color != nboard[i][x][1]) {
+                        table.rows[i].cells[x].classList.add("option");
+                        legal_moves[i][x] = 1;
+                    }
+                    break;
+                }
+            }
+            break;
+        case (1):
+            for (let i = x + 1; i < width; i++) {
+                //look right
+                if (nboard[y][i][0] == "0") {
+                    table.rows[y].cells[i].classList.add("option");
+                    legal_moves[y][i] = 1;
+                } else {
+                    if (color != nboard[y][i][1]) {
+                        table.rows[y].cells[i].classList.add("option");
+                        legal_moves[y][i] = 1;
+                    }
+                    break;
+                }
+            }
+            break;
+        case (2):
+            for (let i = y + 1; i < height; i++) {
+                //look down
+                if (nboard[i][x][0] == "0") {
+                    table.rows[i].cells[x].classList.add("option");
+                    legal_moves[i][x] = 1;
+                } else {
+                    if (color != nboard[i][x][1]) {
+                        table.rows[i].cells[x].classList.add("option");
+                        legal_moves[i][x] = 1;
+                    }
+                    break;
+                }
+            }
+            break;
+        case (3):
+            for (let i = x - 1; i >= 0; i--) {
+                //look left
+                if (nboard[y][i][0] == "0") {
+                    table.rows[y].cells[i].classList.add("option");
+                    legal_moves[y][i] = 1;
+                } else {
+                    if (color != nboard[y][i][1]) {
+                        table.rows[y].cells[i].classList.add("option");
+                        legal_moves[y][i] = 1;
+                    }
+                    break;
+                }
+            }
+            break;
     }
-}
-break;
-case(3):
-for (let i = x - 1; i >= 0; i--) {
-    //look left
-    if (nboard[y][i][0] == "0") {
-        table.rows[y].cells[i].classList.add("option");
-        legal_moves[y][i] = 1;
-    } else {
-        if (color != nboard[y][i][1]) {
-            table.rows[y].cells[i].classList.add("option");
-            legal_moves[y][i] = 1;
-        }
-        break;
-    }
-}
-break;
-}
-if (y > 0) {
-    //top
-    //top left
-    if (
-        x > 0 &&
-        (nboard[y - 1][x - 1][0] == "0" || color != nboard[y - 1][x - 1][1]))
-    {
+    if (y > 0) {
+        //top
         //top left
+        if (
+            x > 0 &&
+            (nboard[y - 1][x - 1][0] == "0" || color != nboard[y - 1][x - 1][1])) {
+            //top left
 
-        table.rows[y - 1].cells[x - 1].classList.add("option");
-        legal_moves[y - 1][x - 1] = 1;
+            table.rows[y - 1].cells[x - 1].classList.add("option");
+            legal_moves[y - 1][x - 1] = 1;
+        }
+        //top stright
+        if (
+            (nboard[y - 1][x][0] == "0" || color != nboard[y - 1][x][1])) {
+            table.rows[y - 1].cells[x].classList.add("option");
+            legal_moves[y - 1][x] = 1;
+        }
+        //top right
+        if (
+            x < width - 1 &&
+            (nboard[y - 1][x + 1][0] == "0" || color != nboard[y - 1][x + 1][1])) {
+            table.rows[y - 1].cells[x + 1].classList.add("option");
+            legal_moves[y - 1][x + 1] = 1;
+        }
     }
-    //top stright
-    if (
-        (nboard[y - 1][x][0] == "0" || color != nboard[y - 1][x][1]) )
-     {
-        table.rows[y - 1].cells[x].classList.add("option");
-        legal_moves[y - 1][x] = 1;
+    if (y < height - 1) {
+        //bottom
+        if (
+            x > 0 &&
+            (nboard[y + 1][x - 1][0] == "0" || color != nboard[y + 1][x - 1][1])
+        ) {
+            table.rows[y + 1].cells[x - 1].classList.add("option");
+            legal_moves[y + 1][x - 1] = 1;
+        }
+        if (
+            (nboard[y + 1][x][0] == "0" || color != nboard[y + 1][x][1])
+        ) {
+            table.rows[y + 1].cells[x].classList.add("option");
+            legal_moves[y + 1][x] = 1;
+        }
+        if (
+            x < width - 1 &&
+            (nboard[y + 1][x + 1][0] == "0" || color != nboard[y + 1][x + 1][1])
+        ) {
+            table.rows[y + 1].cells[x + 1].classList.add("option");
+            legal_moves[y + 1][x + 1] = 1;
+        }
     }
-    //top right
-    if (
-        x < width - 1 &&
-        (nboard[y - 1][x + 1][0] == "0" || color != nboard[y - 1][x + 1][1]))
-     {
-        table.rows[y - 1].cells[x + 1].classList.add("option");
-        legal_moves[y - 1][x + 1] = 1;
-    }
-}
-if (y < height - 1) {
-    //bottom
     if (
         x > 0 &&
-        (nboard[y + 1][x - 1][0] == "0" || color != nboard[y + 1][x - 1][1])
+        (nboard[y][x - 1][0] == "0" || color != nboard[y][x - 1][1])
     ) {
-        table.rows[y + 1].cells[x - 1].classList.add("option");
-        legal_moves[y + 1][x - 1] = 1;
-    }
-    if (
-        (nboard[y + 1][x][0] == "0" || color != nboard[y + 1][x][1])
-    ) {
-        table.rows[y + 1].cells[x].classList.add("option");
-        legal_moves[y + 1][x] = 1;
+        //left
+        table.rows[y].cells[x - 1].classList.add("option");
+        legal_moves[y][x - 1] = 1;
     }
     if (
         x < width - 1 &&
-        (nboard[y + 1][x + 1][0] == "0" || color != nboard[y + 1][x + 1][1])
+        (nboard[y][x + 1][0] == "0" || color != nboard[y][x + 1][1])
     ) {
-        table.rows[y + 1].cells[x + 1].classList.add("option");
-        legal_moves[y + 1][x + 1] = 1;
+        //right
+        table.rows[y].cells[x + 1].classList.add("option");
+        legal_moves[y][x + 1] = 1;
     }
-}
-if (
-    x > 0 &&
-    (nboard[y][x - 1][0] == "0" || color != nboard[y][x - 1][1])
-) {
-    //left
-    table.rows[y].cells[x - 1].classList.add("option");
-    legal_moves[y][x - 1] = 1;
-}
-if (
-    x < width - 1 &&
-    (nboard[y][x + 1][0] == "0" || color != nboard[y][x + 1][1])
-) {
-    //right
-    table.rows[y].cells[x + 1].classList.add("option");
-    legal_moves[y][x + 1] = 1;
-}
 }
 
 

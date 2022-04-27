@@ -4,7 +4,7 @@ function dangerStright(y, x, color, nboard) {
     let cell_type = nboard[i][x][0];
     let cell_color = nboard[i][x][1];
 
-    //look up
+    //look 1 cell up and look for enemy
     if (cell_color != color && (cell_type == "r" || cell_type == "q")) {
       //if diffrent color and rook or queen
      
@@ -20,20 +20,20 @@ function dangerStright(y, x, color, nboard) {
       break;
     }
   }
-
+//if empty go on
+//look 1 cell down and more until hit something
   for (let i = y + 1; i < height; i++) {
     let cell_type = nboard[i][x][0];
     let cell_color = nboard[i][x][1];
-    //look down
     if (cell_color != color && (cell_type == "r" || cell_type == "q")) {
       //if diffrent color and rook or queen
 
       return true;
     } else if (
-      cell_color == color ||
-      (cell_color != color &&
-        cell_color != "0" &&
-        !(cell_type == "r" || cell_type == "q"))
+      cell_color == color || //hit my  friend or
+      (cell_color != color && //hit not my friend
+        cell_color != "0" && //and not empty
+        !(cell_type == "r" || cell_type == "q")) //and not a queen or rook
     ) {
       //if hit same color or diffrent color but not rook or queen
       break;
