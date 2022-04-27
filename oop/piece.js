@@ -21,6 +21,7 @@ class Piece {
     getPossibleEat(boardData) {
       // Get moves
       let moves;
+      // console.log("enemy: " + this.type);
       if (this.type === PAWN) {
         moves = this.getPawnEat(boardData);
       } else if (this.type === ROOK) {
@@ -34,7 +35,7 @@ class Piece {
       } else if (this.type === QUEEN) {
         moves = this.getQueenMoves(boardData);
       } else {
-        console.log("Unknown type", type)
+        console.log("Unknown type ", type)
       }
   
       // Get filtered absolute moves
@@ -67,25 +68,25 @@ class Piece {
         console.log("Unknown type", type)
       }
       //if i am in check
-      if(boardData.player==WHITE_PLAYER&& boardData.whiteCheck)
+      if(boardData.player==WHITE_PLAYER)
       {
-        // check every move if it still is in check
-        let oldBoardData = Object.assign({}, boardData);
-        let row = this.row;
-        let col =this.col;
-        for(let move of moves)
-        {
-          //draw new boarddata
-          if (tryMove(this, this.row, this.col)) {
-            //if i can move to this non-empty cell
-            boardData.removePiece(row, col);
-            // .row = row;
-            // piece.col = col;
-            // Recreate whole board - this is not efficient, but doesn't affect user experience
-          }
+        // check every move if it makes check
+        // let oldBoardData = Object.assign({}, boardData);
+        // let row = this.row;
+        // let col =this.col;
+        // for(let move of moves)
+        // {
+        //   //draw new boarddata
+        //   if (tryMove(this, this.row, this.col)) {
+        //     //if i can move to this non-empty cell
+        //     boardData.removePiece(row, col);
+        //     // .row = row;
+        //     // piece.col = col;
+        //     // Recreate whole board - this is not efficient, but doesn't affect user experience
+        //   }
 
 
-        }
+        // }
       }
 
       // Get filtered absolute moves
@@ -100,7 +101,7 @@ class Piece {
       return filteredMoves;
     }
   
-    getPawnMoves(boardData) {
+    getPawnMoves() {
       let result = [];
       let direction = 1;
       
