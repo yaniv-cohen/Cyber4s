@@ -72,8 +72,13 @@ function rook(y, x, color, nboard) {
     }
 }
 function bishop(y, x, color, nboard) {
-    for (let i = 0; i < y && i < x; i++) {
-        if (nboard[y - i - 1][x - i - 1][0] == "0") {
+let currentLocationY = 0;
+let currentLocationX = 0;
+    for ( currentLocationY=y- 1 , currentLocationX = x-1; 
+        currentLocationY >=0 && currentLocationX>=0 ; 
+        currentLocationY--, currentLocationX--) {
+        
+        if (nboard[currentLocationY][currentLocationX][0] == "0") {
             //up left
             table.rows[y - i - 1].cells[x - i - 1].classList.add("option");
             legal_moves[y - i - 1][x - i - 1] = 1;
@@ -471,13 +476,11 @@ function portal(y, x, color, nboard) {
 
         }
     }
-
-
     //look left
     for (let i = x - 1; true; i--) {
         //look left
         if (i < 0) {
-            i = height - 1;
+            i = width - 1;
         }
         if (nboard[y][i][0] == "0") {
             table.rows[y].cells[i].classList.add("option");

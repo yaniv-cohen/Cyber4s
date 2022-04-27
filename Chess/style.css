@@ -140,38 +140,38 @@ td{
 }
 
 .tankB{
-    background-image: url('black_tank.svg')  ;
+    background-image: url('images/black_tank.svg')  ;
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .tankW{
-    background-image: url('white_tank.svg')  ;
+    background-image: url('images/white_tank.svg')  ;
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
 .portalW{
-    background-image: url('white-portal.svg')  ;
+    background-image: url('images/white-portal.svg')  ;
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
 .portalB{
-    background-image: url('black-portal.svg')  ;
+    background-image: url('images/black-portal.svg')  ;
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
 .beybladeW{
-    background-image: url('white-beyblade.svg')  ;
+    background-image: url('images/white-beyblade.svg')  ;
     background-size: 80px;
     background-repeat: no-repeat;
     background-position: center;
 }
 .beybladeB{
-    background-image: url('black-beyblade.svg')  ;
+    background-image: url('images/black-beyblade.svg')  ;
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
