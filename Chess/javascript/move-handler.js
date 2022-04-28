@@ -20,19 +20,18 @@ function moveHandler(y, x) {
     //if i moved a beyblade
     if (previous_color == "w") {
       beybladeDirectionW++;
-      if (beybladeDirectionW > 3) {
-        beybladeDirectionW = 0;
+      if (beybladeDirectionW <0 ) {
+        beybladeDirectionW = 3;
       }
-      let transformNum = "rotate(" + 90 * beybladeDirectionW + "deg)";
-      console.log("transformNum: " + transformNum);
-      table.rows[y].cells[x].style.transform += transformNum;
+      let transform = 90 * beybladeDirectionW;
+      table.rows[y].cells[x].style.transform = "rotate("+transform+"deg)";
     } else if (previous_color == "b") {
-      beybladeDirectionB++;
+      beybladeDirectionB--;
       if (beybladeDirectionB > 3) {
         beybladeDirectionB = 0;
       }
-      let transform = 90 * beybladeDirectionW;
-      table.rows[y].cells[x].style.transform = transformNum;
+      let transform = 90 * beybladeDirectionB;
+      table.rows[y].cells[x].style.transform = "rotate("+transform+"deg)";
     }
   }
 

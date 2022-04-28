@@ -15,10 +15,10 @@ function dataBoardCreation() {
     //make a shallow-copy of the board and call it previousBoard
     for (var row = 0; row < nboard.length; row++) {
         previous_Board[row] = [];
-      for (var col = 0; col < nboard[row].length; col++) {
-        previous_Board[row][col] = nboard[col][col].slice();
-  
-      }
+        for (var col = 0; col < nboard[row].length; col++) {
+            previous_Board[row][col] = nboard[col][col].slice();
+
+        }
     }
     // previous_board = [
     //     [["r", "b"], ["n", "b"], ["b", "b"], ["q", "b"], ["k", "b"], ["b", "b"], ["n", "b"], ["r", "b"],],
@@ -45,22 +45,22 @@ function dataBoardCreation() {
 function paintGrid(tank, portal, beyblade) {
     dataBoardCreation();
     table.innerHTML = '';
-    console.log("tank " +tank);
+    console.log("tank " + tank);
     if (tank) {
         nboard[1][2][0] = "t";
         nboard[1][5][0] = "t";
         nboard[6][2][0] = "t";
         nboard[6][5][0] = "t";
     }
-    console.log("portal " +portal);
+    console.log("portal " + portal);
     if (portal) {
         nboard[5][1][0] = "pr";
         nboard[5][1][1] = "w";
         nboard[2][6][0] = "pr";
         nboard[2][6][1] = "b";
-        
+
     }
-    console.log("portal " +beyblade);
+    console.log("portal " + beyblade);
     if (beyblade) {
         nboard[2][1][0] = "by";
         nboard[2][1][1] = "b";
@@ -71,10 +71,10 @@ function paintGrid(tank, portal, beyblade) {
     //make a shallow-copy of the board and call it previousBoard
     for (var row = 0; row < nboard.length; row++) {
         previous_Board[row] = [];
-      for (var col = 0; col < nboard[row].length; col++) {
-        previous_Board[row][col] = nboard[col][col].slice();
-  
-      }
+        for (var col = 0; col < nboard[row].length; col++) {
+            previous_Board[row][col] = nboard[col][col].slice();
+
+        }
     }
     for (let row = 0; row < height; row++) {//paint the grid
         const rowElement = table.insertRow();
@@ -94,8 +94,12 @@ function paintGrid(tank, portal, beyblade) {
             cell.type = nboard[row][col][0];
             cell.color = nboard[row][col][1];
             cell.className = (classes);
-            classes = get_class(cell.type, cell.color);
 
+            classes = get_class(cell.type, cell.color);
+            if (cell.type == "by" &&cell.color==BLACK) {
+                let transform = 90 * beybladeDirectionB;
+                cell.style.transform = "rotate(" + transform +"deg)";
+            }
             if (classes.length > 0) {
                 cell.classList.add(classes);
             }
@@ -106,4 +110,3 @@ function paintGrid(tank, portal, beyblade) {
 
     }
 }
-document.addEventListener('load', paintGrid());
