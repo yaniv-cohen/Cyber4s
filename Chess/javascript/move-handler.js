@@ -12,20 +12,20 @@ function moveHandler(y, x) {
   }
   if (previous_type ===PAWN && handlePawnSpecialMoves(y, x, previous_color)) {
     //did this pawn move?
-    previous_type = "q";
-  } else if (previous_type == "k") {
+    previous_type = QUEEN;
+  } else if (previous_type == KING) {
     //if i moved a king
     handleKingSpecialMoves(y, x, nboard, previous_type, previous_color);
   } else if (previous_type == "by") {
     //if i moved a beyblade
-    if (previous_color == "w") {
+    if (previous_color == WHITE) {
       beybladeDirectionW++;
       if (beybladeDirectionW <0 ) {
         beybladeDirectionW = 3;
       }
       let transform = 90 * beybladeDirectionW;
       table.rows[y].cells[x].style.transform = "rotate("+transform+"deg)";
-    } else if (previous_color == "b") {
+    } else if (previous_color == BLACK) {
       beybladeDirectionB--;
       if (beybladeDirectionB > 3) {
         beybladeDirectionB = 0;
@@ -39,34 +39,34 @@ function moveHandler(y, x) {
 }
 function handlePawnSpecialMoves(y, x, previous_color) {
   console.log("previous_color is " + previous_color + y);
-  if (previous_color == "w" && y == 0) {
+  if (previous_color == WHITE && y == 0) {
     return ("q");
 
-  } else if (previous_color == "b" && y == height - 1) {
+  } else if (previous_color == BLACK && y == height - 1) {
     return ('q');
   }
   else if (y == 1 || y == height - 1) {
     //did this pawn move?
-    if (previous_color == "w") {
+    if (previous_color == WHITE) {
       movedW[x] = 1;
-    } else if (previous_color == "b") {
+    } else if (previous_color == BLACK) {
       movedB[x] = 1;
     }
   }
 }
 function handleKingSpecialMoves(y, x, nboard, previous_type, previous_color) {
-  if (previous_color == "b") {
+  if (previous_color == BLACK) {
     //castle black
     if (x == 2) {
       nboard[0][x + 1][0] = "r";
-      nboard[0][x + 1][1] = "b";
+      nboard[0][x + 1][1] = BLACK;
       table.rows[y].cells[x + 1].classList.add("rookB");
       nboard[0][0][0] = "0";
       nboard[0][0][1] = "0";
       table.rows[0].cells[0].classList.remove("rookB");
     } else if (x == width + 2) {
       nboard[0][x - 1][0] = "r";
-      nboard[0][x - 1][1] = "b";
+      nboard[0][x - 1][1] = BLACK;
       table.rows[y].cells[x - 1].classList.add("rookB");
       nboard[0][width - 1][0] = "0";
       nboard[0][width - 1][1] = "0";
@@ -74,18 +74,18 @@ function handleKingSpecialMoves(y, x, nboard, previous_type, previous_color) {
     }
     canCastleB[0] = false;
     canCastleB[1] = false;
-  } else if (previous_color == "w") {
+  } else if (previous_color == WHITE) {
     //castle black
     if (x == last_selection[1] - 2) {
       nboard[y][x + 1][0] = "r";
-      nboard[y][x + 1][1] = "w";
+      nboard[y][x + 1][1] = WHITE;
       table.rows[y].cells[x + 1].classList.add("rookW");
       nboard[y][0][0] = "0";
       nboard[y][0][1] = "0";
       table.rows[y].cells[0].classList.remove("rookW");
     } else if (x == last_selection[1] + 2) {
       nboard[y][x - 1][0] = "r";
-      nboard[y][x - 1][1] = "w";
+      nboard[y][x - 1][1] = WHITE;
       table.rows[y].cells[x - 1].classList.add("rookW");
       nboard[y][width - 1][0] = "0";
       nboard[y][width - 1][1] = "0";

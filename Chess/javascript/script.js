@@ -8,8 +8,8 @@ let canCastleB = [true, true]; //todo add cstle
 let last_selection = ["", "", "", ""];
 let movedB = [0, 0, 0, 0, 0, 0, 0, 0]; //did the piece in the pawn row move? 0=no 1=yes
 let movedW = [0, 0, 0, 0, 0, 0, 0, 0];//did the piece in the pawn row move? 0=no 1=yes
-let beybladeDirectionW = 0;
-let beybladeDirectionB = 2;
+let beybladeDirectionW = 1;
+let beybladeDirectionB = 3;
 let current_player = "w";
 let previous_board = [];
 let turn_div = document.getElementById("turnDiv");

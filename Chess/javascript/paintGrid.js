@@ -96,9 +96,16 @@ function paintGrid(tank, portal, beyblade) {
             cell.className = (classes);
 
             classes = get_class(cell.type, cell.color);
-            if (cell.type == "by" &&cell.color==BLACK) {
+            if (cell.type == "by") {
+                if(cell.color==BLACK)
+                {
                 let transform = 90 * beybladeDirectionB;
                 cell.style.transform = "rotate(" + transform +"deg)";
+            }
+            else
+            {
+                cell.style.transform = "rotate(" + beybladeDirectionW +"deg)";
+            }
             }
             if (classes.length > 0) {
                 cell.classList.add(classes);

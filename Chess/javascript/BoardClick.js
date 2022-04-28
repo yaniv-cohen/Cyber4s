@@ -44,8 +44,10 @@ function boardClick(y, x) {
             if (type == "k") {
                 if (color == "w") {
                     alert("Black Won");
+                    document.getElementById('endScreenBlack').style.display="block";
                 } else {
                     alert("White Won");
+                    document.getElementById('endScreenWhite').style.display="block";
                 }
             }
             changePlayer();

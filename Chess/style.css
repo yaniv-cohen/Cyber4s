@@ -1,178 +1,223 @@
-body{
+body {
     background-color: rgb(243, 243, 243);
-    font-family:'open sans', sans-serif;
+    font-family: 'open sans', sans-serif;
 }
-main{
+
+main {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
     align-items: center;
 }
-table{
-    border:4px black solid;
+
+table {
+    border: 4px black solid;
 }
 
-.container{
+.container {
     /* padding:20px; */
     display: flex;
     align-self: center;
     /* background-color: rgb(51, 44, 34);
     color:white; */
 }
-.turnContainer{
+
+.turnContainer {
     width: 300px;
     /* height: 50px; */
     display: flex;
 }
-.whiteTurn{
-background-color: rgb(245, 245, 245);
-color:black;
+
+.whiteTurn {
+    background-color: rgb(245, 245, 245);
+    color: black;
 }
-.blackTurn{
+
+.blackTurn {
     background-color: rgb(21, 18, 14);
-    color:white;
+    color: white;
 }
-.box{
+
+.box {
     border: 4px rgb(143, 20, 20) solid;
     width: 300px;
     height: 100px;
-    padding:10px;
-    font-size:30px;
+    padding: 10px;
+    font-size: 30px;
 }
 
-td{
-    width:70px;
-    height:70px;
+td {
+    width: 70px;
+    height: 70px;
     transition: 0.5s, transform 0s;
 }
 
 
-.cellW{
-    background:   #F2DCAF;
+.cellW {
+    background: #F2DCAF;
 }
-.cellB{
-    background:   #BC895A;
+
+.cellB {
+    background: #BC895A;
 }
-.selected{
+
+.selected {
     background-color: rgb(147, 220, 38);
 }
-.option{
-    background-color: rgba(147, 220, 38,0.5);
+
+.option {
+    background-color: rgba(147, 220, 38, 0.5);
 }
-.red{
+
+.red {
     background-color: rgb(202, 52, 52) !important;
 }
-.kingB{
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Chess_kdt45.svg/1024px-Chess_kdt45.svg.png')  ;
-    background-size: 70px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.queenB{
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Chess_qdt45.svg/1024px-Chess_qdt45.svg.png')  ;
+
+.kingB {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Chess_kdt45.svg/1024px-Chess_kdt45.svg.png');
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.rookB{
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Chess_rdt45.svg/1024px-Chess_rdt45.svg.png')  ;
+.queenB {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Chess_qdt45.svg/1024px-Chess_qdt45.svg.png');
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
-.bishopB{
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Chess_bdt45.svg/1024px-Chess_bdt45.svg.png')  ;
+
+.rookB {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Chess_rdt45.svg/1024px-Chess_rdt45.svg.png');
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
-.knightB{
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Chess_ndt45.svg/1024px-Chess_ndt45.svg.png')  ;
+
+.bishopB {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Chess_bdt45.svg/1024px-Chess_bdt45.svg.png');
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
-.pawnB{
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Chess_pdt45.svg/1024px-Chess_pdt45.svg.png')  ;
+
+.knightB {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Chess_ndt45.svg/1024px-Chess_ndt45.svg.png');
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.pawnB {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Chess_pdt45.svg/1024px-Chess_pdt45.svg.png');
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 
-.kingW{
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Chess_klt45.svg/1024px-Chess_klt45.svg.png')  ;
-    background-size: 70px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.queenW{
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Chess_qlt45.svg/1024px-Chess_qlt45.svg.png')  ;
+.kingW {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Chess_klt45.svg/1024px-Chess_klt45.svg.png');
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.rookW{
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Chess_rlt45.svg/1024px-Chess_rlt45.svg.png')  ;
-    background-size: 70px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.bishopW{
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Chess_blt45.svg/1024px-Chess_blt45.svg.png')  ;
-    background-size: 70px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.knightW{
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Chess_nlt45.svg/1024px-Chess_nlt45.svg.png')  ;
-    background-size: 70px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.pawnW{
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Chess_plt45.svg/1024px-Chess_plt45.svg.png')  ;
+.queenW {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Chess_qlt45.svg/1024px-Chess_qlt45.svg.png');
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.tankB{
-    background-image: url('images/black_tank.svg')  ;
+.rookW {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Chess_rlt45.svg/1024px-Chess_rlt45.svg.png');
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.tankW{
-    background-image: url('images/white_tank.svg')  ;
+.bishopW {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Chess_blt45.svg/1024px-Chess_blt45.svg.png');
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
-.portalW{
-    background-image: url('images/white-portal.svg')  ;
+
+.knightW {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Chess_nlt45.svg/1024px-Chess_nlt45.svg.png');
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
-.portalB{
-    background-image: url('images/black-portal.svg')  ;
+
+.pawnW {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Chess_plt45.svg/1024px-Chess_plt45.svg.png');
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
 }
-.beybladeW{
-    background-image: url('images/white-beyblade.svg')  ;
+
+.tankB {
+    background-image: url('images/black_tank.svg');
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.tankW {
+    background-image: url('images/white_tank.svg');
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.portalW {
+    background-image: url('images/white-portal.svg');
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.portalB {
+    background-image: url('images/black-portal.svg');
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.beybladeW {
+    background-image: url('images/white-beyblade.svg');
     background-size: 80px;
     background-repeat: no-repeat;
     background-position: center;
 }
-.beybladeB{
-    background-image: url('images/black-beyblade.svg')  ;
+
+.beybladeB {
+    background-image: url('images/black-beyblade.svg');
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+#endScreenWhite {
+    position: absolute;
+    transform: translate(40%, 20%);
+    display: none;
+     width: 300px;
+    height: 400px;
+    padding:20px;
+    text-align:center;
+background:rgba(222, 222, 222, 0.9);
+}
+#endScreenBlack {
+    position: absolute;
+    transform: translate(40%, 20%);
+    color:white;
+    display: none;
+     width: 300px;
+    height: 400px;
+    padding:20px;
+    text-align:center;
+background:rgba(22, 22, 22, 0.9);
 }
